@@ -6,8 +6,10 @@
 
 <title>11Б Ирцийн мэдээлэл</title>
 
+<!-- html2canvas -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
@@ -20,9 +22,16 @@
   --text:#f4f6fb;
   --muted:#8f98aa;
   --accent:#7c5cff;
+
   --green:#20c997;
+  --green-bg:#10261f;
+
   --red:#ff5252;
+  --red-bg:#291317;
+
   --yellow:#ffc857;
+  --yellow-bg:#29230f;
+
   --border:#252a36;
 }
 
@@ -30,7 +39,8 @@
   box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
   min-height:100%;
@@ -52,6 +62,7 @@ body{
   width:245px;
   background:rgba(12,14,20,.98);
   border-right:1px solid var(--border);
+
   padding:24px 16px;
 
   position:fixed;
@@ -59,6 +70,7 @@ body{
   left:0;
 
   height:100vh;
+
   z-index:999;
 
   transition:transform .25s ease;
@@ -73,6 +85,7 @@ body{
 
   display:flex;
   flex-direction:column;
+
   gap:10px;
 }
 
@@ -85,12 +98,16 @@ body{
   border-radius:12px;
 
   background:transparent;
+
   color:#dce1ec;
 
   text-align:left;
+
   font-size:15px;
 
   cursor:pointer;
+
+  transition:.2s;
 }
 
 .nav button:hover{
@@ -105,7 +122,7 @@ body{
 
 
 /* =====================================================
-   MENU
+   MENU BUTTON
 ===================================================== */
 
 .menu-btn{
@@ -123,11 +140,14 @@ body{
   border-radius:12px;
 
   background:#10141d;
+
   color:#fff;
 
   font-size:22px;
 
   cursor:pointer;
+
+  box-shadow:0 5px 20px rgba(0,0,0,.25);
 }
 
 .menu-btn:hover{
@@ -137,27 +157,19 @@ body{
 
 /* =====================================================
    MAIN
+   Sidebar гарсан ч ҮНДСЭН хэсэг жижигрэхгүй
 ===================================================== */
 
 .main{
-  margin-left:245px;
+  margin-left:0;
 
-  width:calc(100% - 245px);
+  width:100%;
 
   min-height:100vh;
 
   padding:30px;
 
   max-width:none;
-
-  transition:
-    margin-left .25s ease,
-    width .25s ease;
-}
-
-.main.full{
-  margin-left:0;
-  width:100%;
 }
 
 
@@ -180,16 +192,19 @@ body{
 
 .header{
   margin:40px auto 25px;
+
   max-width:1200px;
 }
 
 .header h1{
   margin:0 0 8px;
+
   font-size:32px;
 }
 
 .header p{
   margin:0;
+
   color:var(--muted);
 }
 
@@ -220,27 +235,28 @@ body{
 
   padding:18px;
 
-  position:relative;
-
   overflow:hidden;
 }
 
 .stat .label{
   color:var(--muted);
+
   font-size:13px;
+
   margin-bottom:8px;
 }
 
 .stat .number{
   font-size:27px;
+
   font-weight:700;
 }
 
 
-/* ДЭЭД ТАЛЫН ӨНГӨ */
+/* Дээд 4 статистикийн өнгө */
 
 .stat.total{
-  border-top:3px solid #7c5cff;
+  border-top:3px solid var(--accent);
 }
 
 .stat.present{
@@ -304,14 +320,22 @@ body{
 
 .card-head h2{
   margin:0;
+
   font-size:18px;
 }
 
 .controls{
   display:flex;
+
   gap:10px;
+
   flex-wrap:wrap;
 }
+
+
+/* =====================================================
+   INPUT / SELECT
+===================================================== */
 
 input,
 select{
@@ -347,7 +371,7 @@ button{
 
   background:var(--accent);
 
-  color:white;
+  color:#fff;
 
   border-radius:10px;
 
@@ -369,6 +393,7 @@ button{
 
 .table-wrap{
   width:100%;
+
   overflow-x:auto;
 }
 
@@ -415,12 +440,6 @@ td{
 }
 
 .status button{
-  border:1px solid #303746;
-
-  background:#111620;
-
-  color:#aeb6c6;
-
   padding:7px 11px;
 
   border-radius:8px;
@@ -429,63 +448,87 @@ td{
 
   font-size:12px;
 
+  font-weight:600;
+
   transition:.15s;
 }
 
 
-/* ИРСЭН */
+/* ---------- ИРСЭН ---------- */
 
-.status button.status-present{
+.status-present{
   color:var(--green);
-  border-color:#1d755c;
-  background:#10261f;
+
+  background:var(--green-bg);
+
+  border:1px solid #1d755c;
 }
 
-.status button.status-present.active{
+.status-present:hover{
+  background:#16372d;
+}
+
+.status-present.active{
   background:var(--green);
+
   border-color:var(--green);
+
   color:#06130f;
-  font-weight:700;
 }
 
 
-/* ТАСАЛСАН */
+/* ---------- ТАСАЛСАН ---------- */
 
-.status button.status-absent{
+.status-absent{
   color:var(--red);
-  border-color:#75323a;
-  background:#291317;
+
+  background:var(--red-bg);
+
+  border:1px solid #75323a;
 }
 
-.status button.status-absent.active{
+.status-absent:hover{
+  background:#3a191e;
+}
+
+.status-absent.active{
   background:var(--red);
+
   border-color:var(--red);
+
   color:#180507;
-  font-weight:700;
 }
 
 
-/* ЧӨЛӨӨТЭЙ */
+/* ---------- ЧӨЛӨӨТЭЙ ---------- */
 
-.status button.status-free{
+.status-free{
   color:var(--yellow);
-  border-color:#80672c;
-  background:#29230f;
+
+  background:var(--yellow-bg);
+
+  border:1px solid #80672c;
 }
 
-.status button.status-free.active{
+.status-free:hover{
+  background:#3b3215;
+}
+
+.status-free.active{
   background:var(--yellow);
+
   border-color:var(--yellow);
+
   color:#171100;
-  font-weight:700;
 }
 
 
-/* HISTORY BUTTONS DISABLED */
+/* History дээр дарах боломжгүй */
 
 .status button:disabled{
   cursor:default;
-  opacity:.9;
+
+  opacity:.95;
 }
 
 
@@ -589,6 +632,7 @@ td{
 
 .modal-box{
   width:100%;
+
   max-width:380px;
 
   background:#10141d;
@@ -662,7 +706,8 @@ td{
   }
 
   .stats{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
   .stat{
@@ -695,11 +740,15 @@ td{
 
 
 /* =====================================================
-   EXPORT IMAGE
+   EXPORT
 ===================================================== */
 
-.export-title{
-  color:#fff;
+.export-container{
+  position:fixed;
+
+  left:-100000px;
+
+  top:0;
 }
 
 </style>
@@ -725,446 +774,466 @@ td{
 <div class="app">
 
 
-  <!-- ===================================================
-       SIDEBAR
-  =================================================== -->
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
-  <aside
-    class="sidebar hidden"
-    id="sidebar">
-
-    <div class="nav">
-
-      <button
-        id="homeNav"
-        class="active"
-        onclick="showPage('home')">
-
-        🏠 &nbsp; Home
-
-      </button>
+<aside
+  class="sidebar hidden"
+  id="sidebar">
 
 
-      <button
-        id="historyNav"
-        onclick="showPage('history')">
-
-        📅 &nbsp; Өмнөх ирц
-
-      </button>
+  <div class="nav">
 
 
-      <button
-        id="adminNav"
-        onclick="openAdmin()">
+    <button
+      id="homeNav"
+      class="active"
+      onclick="showPage('home')">
 
-        🦹🏻‍♂️ &nbsp; Admin
+      🏠 &nbsp; Home
 
-      </button>
+    </button>
+
+
+    <button
+      id="historyNav"
+      onclick="showPage('history')">
+
+      📅 &nbsp; Өмнөх ирц
+
+    </button>
+
+
+    <button
+      id="adminNav"
+      onclick="openAdmin()">
+
+      🦹🏻‍♂️ &nbsp; Admin
+
+    </button>
+
+
+  </div>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<section
+  id="home"
+  class="page active">
+
+
+  <div class="header">
+
+    <h1>
+      11Б ирцийн мэдээлэл
+    </h1>
+
+    <p id="today"></p>
+
+  </div>
+
+
+  <!-- STATS -->
+
+  <div class="stats">
+
+
+    <div class="stat total">
+
+      <div class="label">
+        Нийт сурагч
+      </div>
+
+      <div
+        class="number"
+        id="total">
+
+        0
+
+      </div>
 
     </div>
 
-  </aside>
 
+    <div class="stat present">
 
-  <!-- ===================================================
-       MAIN
-  =================================================== -->
+      <div class="label">
+        Ирсэн
+      </div>
 
-  <main class="main full">
+      <div
+        class="number"
+        id="present">
 
-
-    <!-- =================================================
-         HOME
-    ================================================= -->
-
-    <section
-      id="home"
-      class="page active">
-
-
-      <div class="header">
-
-        <h1>
-          11Б ирцийн мэдээлэл
-        </h1>
-
-        <p id="today"></p>
+        0
 
       </div>
 
-
-      <!-- STATS -->
-
-      <div class="stats">
+    </div>
 
 
-        <div class="stat total">
+    <div class="stat absent">
 
-          <div class="label">
-            Нийт сурагч
-          </div>
+      <div class="label">
+        Тасалсан
+      </div>
 
-          <div
-            class="number"
-            id="total">
+      <div
+        class="number"
+        id="absent">
 
-            0
+        0
 
-          </div>
+      </div>
 
-        </div>
-
-
-        <div class="stat present">
-
-          <div class="label">
-            Ирсэн
-          </div>
-
-          <div
-            class="number"
-            id="present">
-
-            0
-
-          </div>
-
-        </div>
+    </div>
 
 
-        <div class="stat absent">
+    <div class="stat free">
 
-          <div class="label">
-            Тасалсан
-          </div>
+      <div class="label">
+        Чөлөөтэй
+      </div>
 
-          <div
-            class="number"
-            id="absent">
+      <div
+        class="number"
+        id="free">
 
-            0
+        0
 
-          </div>
+      </div>
 
-        </div>
+    </div>
 
 
-        <div class="stat free">
+  </div>
 
-          <div class="label">
-            Чөлөөтэй
-          </div>
 
-          <div
-            class="number"
-            id="free">
+  <!-- ATTENDANCE -->
 
-            0
+  <div class="card">
 
-          </div>
 
-        </div>
+    <div class="card-head">
+
+
+      <h2>
+        Өнөөдрийн ирц
+      </h2>
+
+
+      <div class="controls">
+
+
+        <input
+          id="search"
+          type="text"
+          placeholder="Сурагч хайх..."
+          oninput="renderAttendance()">
+
+
+        <button
+          class="primary"
+          onclick="downloadAttendanceImage()">
+
+          📸 Зураг татах
+
+        </button>
 
 
       </div>
 
 
-      <!-- ATTENDANCE -->
-
-      <div class="card">
+    </div>
 
 
-        <div class="card-head">
-
-          <h2>
-            Өнөөдрийн ирц
-          </h2>
+    <div class="table-wrap">
 
 
-          <div class="controls">
+      <table>
 
 
-            <input
-              id="search"
-              type="text"
-              placeholder="Сурагч хайх..."
-              oninput="renderAttendance()">
+        <thead>
+
+          <tr>
+
+            <th>
+              #
+            </th>
+
+            <th>
+              Сурагч
+            </th>
+
+            <th>
+              Ирц
+            </th>
+
+          </tr>
+
+        </thead>
 
 
-            <button
-              class="primary"
-              onclick="downloadAttendanceImage()">
-
-              📸 Зураг татах
-
-            </button>
+        <tbody
+          id="attendanceBody">
+        </tbody>
 
 
-          </div>
-
-        </div>
+      </table>
 
 
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-
-                <th>
-                  #
-                </th>
-
-                <th>
-                  Сурагч
-                </th>
-
-                <th>
-                  Ирц
-                </th>
-
-              </tr>
-
-            </thead>
+    </div>
 
 
-            <tbody
-              id="attendanceBody">
-            </tbody>
+  </div>
 
-          </table>
 
-        </div>
+</section>
+
+
+<!-- =====================================================
+     HISTORY
+===================================================== -->
+
+<section
+  id="history"
+  class="page">
+
+
+  <div class="header">
+
+    <h1>
+      Өмнөх ирц
+    </h1>
+
+    <p id="historyTitle">
+      Өмнөх өдрийн ирц
+    </p>
+
+  </div>
+
+
+  <div class="stats">
+
+
+    <div class="stat total">
+
+      <div class="label">
+        Нийт сурагч
+      </div>
+
+      <div
+        class="number"
+        id="historyTotal">
+
+        0
 
       </div>
 
-    </section>
+    </div>
 
 
+    <div class="stat present">
 
-    <!-- =================================================
-         HISTORY
-    ================================================= -->
+      <div class="label">
+        Ирсэн
+      </div>
 
-    <section
-      id="history"
-      class="page">
+      <div
+        class="number"
+        id="historyPresent">
 
-
-      <div class="header">
-
-        <h1>
-          Өмнөх ирц
-        </h1>
-
-        <p id="historyTitle">
-          Өмнөх өдрийн ирц
-        </p>
+        0
 
       </div>
 
-
-      <div class="stats">
-
-
-        <div class="stat total">
-
-          <div class="label">
-            Нийт сурагч
-          </div>
-
-          <div
-            class="number"
-            id="historyTotal">
-
-            0
-
-          </div>
-
-        </div>
+    </div>
 
 
-        <div class="stat present">
+    <div class="stat absent">
 
-          <div class="label">
-            Ирсэн
-          </div>
+      <div class="label">
+        Тасалсан
+      </div>
 
-          <div
-            class="number"
-            id="historyPresent">
+      <div
+        class="number"
+        id="historyAbsent">
 
-            0
-
-          </div>
-
-        </div>
-
-
-        <div class="stat absent">
-
-          <div class="label">
-            Тасалсан
-          </div>
-
-          <div
-            class="number"
-            id="historyAbsent">
-
-            0
-
-          </div>
-
-        </div>
-
-
-        <div class="stat free">
-
-          <div class="label">
-            Чөлөөтэй
-          </div>
-
-          <div
-            class="number"
-            id="historyFree">
-
-            0
-
-          </div>
-
-        </div>
-
+        0
 
       </div>
 
-
-      <div class="card">
-
-
-        <div class="card-head">
-
-          <h2>
-            Ирц сонгох
-          </h2>
+    </div>
 
 
-          <select
-            id="historyDate"
-            onchange="renderHistory()">
+    <div class="stat free">
 
-          </select>
+      <div class="label">
+        Чөлөөтэй
+      </div>
 
-        </div>
+      <div
+        class="number"
+        id="historyFree">
 
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-
-                <th>
-                  #
-                </th>
-
-                <th>
-                  Сурагч
-                </th>
-
-                <th>
-                  Ирц
-                </th>
-
-              </tr>
-
-            </thead>
-
-
-            <tbody
-              id="historyBody">
-            </tbody>
-
-          </table>
-
-        </div>
+        0
 
       </div>
 
-    </section>
+    </div>
 
 
-
-    <!-- =================================================
-         ADMIN
-    ================================================= -->
-
-    <section
-      id="admin"
-      class="page">
+  </div>
 
 
-      <div class="header">
-
-        <h1>
-          Admin
-        </h1>
-
-        <p>
-          Сурагчдын жагсаалтыг удирдах
-        </p>
-
-      </div>
+  <div class="card">
 
 
-      <div class="admin-box">
+    <div class="card-head">
 
 
-        <div class="add-box">
-
-          <input
-            id="newStudent"
-            type="text"
-            placeholder="Шинэ сурагчийн нэр">
+      <h2>
+        Ирц сонгох
+      </h2>
 
 
-          <button
-            class="primary"
-            onclick="addStudent()">
+      <select
+        id="historyDate"
+        onchange="renderHistory()">
 
-            + Нэмэх
-
-          </button>
-
-        </div>
+      </select>
 
 
-        <h3>
-
-          Сурагчид
-
-          <span id="adminCount">
-            (0)
-          </span>
-
-        </h3>
+    </div>
 
 
-        <div id="adminList"></div>
-
-      </div>
-
-    </section>
+    <div class="table-wrap">
 
 
-  </main>
+      <table>
+
+
+        <thead>
+
+          <tr>
+
+            <th>
+              #
+            </th>
+
+            <th>
+              Сурагч
+            </th>
+
+            <th>
+              Ирц
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody
+          id="historyBody">
+        </tbody>
+
+
+      </table>
+
+
+    </div>
+
+
+  </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     ADMIN
+===================================================== -->
+
+<section
+  id="admin"
+  class="page">
+
+
+  <div class="header">
+
+    <h1>
+      Admin
+    </h1>
+
+    <p>
+      Сурагчдын жагсаалтыг удирдах
+    </p>
+
+  </div>
+
+
+  <div class="admin-box">
+
+
+    <div class="add-box">
+
+
+      <input
+        id="newStudent"
+        type="text"
+        placeholder="Шинэ сурагчийн нэр">
+
+
+      <button
+        class="primary"
+        onclick="addStudent()">
+
+        + Нэмэх
+
+      </button>
+
+
+    </div>
+
+
+    <h3>
+
+      Сурагчид
+
+      <span id="adminCount">
+        (0)
+      </span>
+
+    </h3>
+
+
+    <div id="adminList"></div>
+
+
+  </div>
+
+
+</section>
+
+
+</main>
 
 </div>
-
 
 
 <!-- =====================================================
@@ -1185,7 +1254,9 @@ td{
 
 
     <p style="color:#8f98aa;">
+
       Admin нууц үгээ оруулна уу.
+
     </p>
 
 
@@ -1225,13 +1296,14 @@ td{
 
     </div>
 
+
   </div>
 
 </div>
 
 
-
 <script>
+
 
 /* =====================================================
    FIREBASE
@@ -1266,7 +1338,9 @@ const firebaseConfig = {
 };
 
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(
+  firebaseConfig
+);
 
 
 const db =
@@ -1274,11 +1348,15 @@ const db =
 
 
 const studentsRef =
-  db.ref("class11B/students");
+  db.ref(
+    "class11B/students"
+  );
 
 
 const attendanceRef =
-  db.ref("class11B/attendance");
+  db.ref(
+    "class11B/attendance"
+  );
 
 
 /* =====================================================
@@ -1334,10 +1412,6 @@ let attendance =
   {};
 
 
-let dataReady =
-  false;
-
-
 /* =====================================================
    DATE
 ===================================================== */
@@ -1384,20 +1458,8 @@ function toggleSidebar(){
       "sidebar"
     );
 
-
-  const main =
-    document.querySelector(
-      ".main"
-    );
-
-
   sidebar.classList.toggle(
     "hidden"
-  );
-
-
-  main.classList.toggle(
-    "full"
   );
 
 }
@@ -1407,29 +1469,30 @@ function toggleSidebar(){
    PAGE SWITCH
 ===================================================== */
 
-function showPage(p){
-
+function showPage(page){
 
   document
     .querySelectorAll(".page")
     .forEach(
-      x =>
-        x.classList.remove(
+      item =>
+        item.classList.remove(
           "active"
         )
     );
 
 
   document
-    .getElementById(p)
-    .classList.add("active");
+    .getElementById(page)
+    .classList.add(
+      "active"
+    );
 
 
   document
     .getElementById("homeNav")
     .classList.toggle(
       "active",
-      p === "home"
+      page === "home"
     );
 
 
@@ -1437,7 +1500,7 @@ function showPage(p){
     .getElementById("historyNav")
     .classList.toggle(
       "active",
-      p === "history"
+      page === "history"
     );
 
 
@@ -1445,18 +1508,18 @@ function showPage(p){
     .getElementById("adminNav")
     .classList.toggle(
       "active",
-      p === "admin"
+      page === "admin"
     );
 
 
-  if(p === "home"){
+  if(page === "home"){
 
     renderAttendance();
 
   }
 
 
-  else if(p === "history"){
+  if(page === "history"){
 
     renderHistoryDates();
 
@@ -1465,35 +1528,20 @@ function showPage(p){
   }
 
 
-  else if(p === "admin"){
+  if(page === "admin"){
 
     renderAdmin();
 
   }
 
 
-  /* Sidebar автоматаар хаагдана */
+  /* Сонгосны дараа Sidebar хаана */
 
-  const sidebar =
-    document.getElementById(
-      "sidebar"
+  document
+    .getElementById("sidebar")
+    .classList.add(
+      "hidden"
     );
-
-
-  const main =
-    document.querySelector(
-      ".main"
-    );
-
-
-  sidebar.classList.add(
-    "hidden"
-  );
-
-
-  main.classList.add(
-    "full"
-  );
 
 }
 
@@ -1504,14 +1552,32 @@ function showPage(p){
 
 function statusClass(status){
 
-  if(status === "Ирсэн")
+  if(
+    status === "Ирсэн"
+  ){
+
     return "status-present";
 
-  if(status === "Тасалсан")
+  }
+
+
+  if(
+    status === "Тасалсан"
+  ){
+
     return "status-absent";
 
-  if(status === "Чөлөөтэй")
+  }
+
+
+  if(
+    status === "Чөлөөтэй"
+  ){
+
     return "status-free";
+
+  }
+
 
   return "";
 
@@ -1531,7 +1597,9 @@ function key(){
 
 function getToday(){
 
-  return attendance[key()] || {};
+  return attendance[
+    key()
+  ] || {};
 
 }
 
@@ -1541,7 +1609,9 @@ async function setStatus(
   status
 ){
 
-  if(!attendance[key()]){
+  if(
+    !attendance[key()]
+  ){
 
     attendance[key()] = {};
 
@@ -1564,9 +1634,11 @@ async function setStatus(
 
   }
 
-  catch(e){
+  catch(error){
 
-    console.error(e);
+    console.error(
+      error
+    );
 
     alert(
       "Ирц бүртгэхэд алдаа гарлаа."
@@ -1589,9 +1661,10 @@ function renderAttendance(){
     );
 
 
-  const q =
+  const query =
     (
-      search.value || ""
+      search.value ||
+      ""
     )
     .toLowerCase()
     .trim();
@@ -1609,107 +1682,114 @@ function renderAttendance(){
 
   const filtered =
     students.filter(
-      s =>
-        s.toLowerCase()
-         .includes(q)
+      student =>
+        student
+          .toLowerCase()
+          .includes(query)
     );
 
 
   body.innerHTML =
+    filtered
+      .map(
+        (student,index) => {
 
-    filtered.map(
-      (s,i) => {
-
-        const status =
-          data[s] ||
-          "Ирсэн";
-
-
-        return `
-
-          <tr>
-
-            <td>
-              ${i + 1}
-            </td>
+          const status =
+            data[student] ||
+            "Ирсэн";
 
 
-            <td>
-              <b>
-                ${escapeHtml(s)}
-              </b>
-            </td>
+          return `
+
+            <tr>
+
+              <td>
+                ${index + 1}
+              </td>
 
 
-            <td>
-
-              <div class="status">
-
-
-                <button
-
-                  class="${statusClass("Ирсэн")}
-                  ${status === "Ирсэн" ? "active" : ""}
-
-                  onclick="
-                    setStatus(
-                      '${escapeJs(s)}',
-                      'Ирсэн'
-                    )
-                  ">
-
-                  Ирсэн
-
-                </button>
+              <td>
+                <b>
+                  ${escapeHtml(student)}
+                </b>
+              </td>
 
 
-                <button
+              <td>
 
-                  class="${statusClass("Тасалсан")}
-                  ${status === "Тасалсан" ? "active" : ""}
-
-                  onclick="
-                    setStatus(
-                      '${escapeJs(s)}',
-                      'Тасалсан'
-                    )
-                  ">
-
-                  Тасалсан
-
-                </button>
+                <div class="status">
 
 
-                <button
+                  <button
+                    type="button"
+                    class="
+                      status-present
+                      ${status === "Ирсэн" ? "active" : ""}
+                    "
+                    onclick="
+                      setStatus(
+                        '${escapeJs(student)}',
+                        'Ирсэн'
+                      )
+                    ">
 
-                  class="${statusClass("Чөлөөтэй")}
-                  ${status === "Чөлөөтэй" ? "active" : ""}
+                    Ирсэн
 
-                  onclick="
-                    setStatus(
-                      '${escapeJs(s)}',
-                      'Чөлөөтэй'
-                    )
-                  ">
-
-                  Чөлөөтэй
-
-                </button>
-
-
-              </div>
-
-            </td>
-
-          </tr>
-
-        `;
-
-      }
-    ).join("");
+                  </button>
 
 
-  if(!filtered.length){
+                  <button
+                    type="button"
+                    class="
+                      status-absent
+                      ${status === "Тасалсан" ? "active" : ""}
+                    "
+                    onclick="
+                      setStatus(
+                        '${escapeJs(student)}',
+                        'Тасалсан'
+                      )
+                    ">
+
+                    Тасалсан
+
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="
+                      status-free
+                      ${status === "Чөлөөтэй" ? "active" : ""}
+                    "
+                    onclick="
+                      setStatus(
+                        '${escapeJs(student)}',
+                        'Чөлөөтэй'
+                      )
+                    ">
+
+                    Чөлөөтэй
+
+                  </button>
+
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          `;
+
+        }
+      )
+      .join("");
+
+
+  if(
+    !filtered.length
+  ){
 
     body.innerHTML = `
 
@@ -1756,11 +1836,12 @@ function updateStats(){
   ).textContent =
 
     students.filter(
-      s =>
+      student =>
         (
-          data[s] ||
+          data[student] ||
           "Ирсэн"
-        ) === "Ирсэн"
+        ) ===
+        "Ирсэн"
     ).length;
 
 
@@ -1769,8 +1850,8 @@ function updateStats(){
   ).textContent =
 
     students.filter(
-      s =>
-        data[s] ===
+      student =>
+        data[student] ===
         "Тасалсан"
     ).length;
 
@@ -1780,8 +1861,8 @@ function updateStats(){
   ).textContent =
 
     students.filter(
-      s =>
-        data[s] ===
+      student =>
+        data[student] ===
         "Чөлөөтэй"
     ).length;
 
@@ -1789,7 +1870,7 @@ function updateStats(){
 
 
 /* =====================================================
-   HISTORY DATE
+   HISTORY
 ===================================================== */
 
 function formatHistoryDate(
@@ -1877,7 +1958,9 @@ function renderHistoryDates(){
     .reverse();
 
 
-  if(!dates.length){
+  if(
+    dates.length === 0
+  ){
 
     select.innerHTML = `
 
@@ -1900,18 +1983,19 @@ function renderHistoryDates(){
 
 
   select.innerHTML =
+    dates
+      .map(
+        date => `
 
-    dates.map(
-      date => `
+          <option value="${date}">
 
-        <option value="${date}">
+            ${formatHistoryDate(date)}
 
-          ${formatHistoryDate(date)}
+          </option>
 
-        </option>
-
-      `
-    ).join("");
+        `
+      )
+      .join("");
 
 
   if(
@@ -1931,10 +2015,6 @@ function renderHistoryDates(){
 
 }
 
-
-/* =====================================================
-   HISTORY RENDER
-===================================================== */
 
 function renderHistory(){
 
@@ -2006,7 +2086,6 @@ function renderHistory(){
   document.getElementById(
     "historyTitle"
   ).textContent =
-
     formatHistoryDate(date) +
     " — Ирц";
 
@@ -2019,106 +2098,113 @@ function renderHistory(){
 
 
   body.innerHTML =
+    students
+      .map(
+        (student,index) => {
 
-    students.map(
-      (s,i) => {
-
-        const status =
-          data[s] ||
-          "Ирсэн";
-
-
-        if(
-          status === "Ирсэн"
-        )
-          present++;
+          const status =
+            data[student] ||
+            "Ирсэн";
 
 
-        if(
-          status === "Тасалсан"
-        )
-          absent++;
+          if(
+            status === "Ирсэн"
+          ){
+
+            present++;
+
+          }
 
 
-        if(
-          status === "Чөлөөтэй"
-        )
-          free++;
+          if(
+            status === "Тасалсан"
+          ){
+
+            absent++;
+
+          }
 
 
-        return `
+          if(
+            status === "Чөлөөтэй"
+          ){
 
-          <tr>
+            free++;
 
-            <td>
-              ${i + 1}
-            </td>
-
-
-            <td>
-              <b>
-                ${escapeHtml(s)}
-              </b>
-            </td>
+          }
 
 
-            <td>
+          return `
 
-              <div class="status">
+            <tr>
 
-
-                <button
-
-                  disabled
-
-                  class="
-                    ${statusClass("Ирсэн")}
-                    ${status === "Ирсэн" ? "active" : ""}
-                  ">
-
-                  Ирсэн
-
-                </button>
+              <td>
+                ${index + 1}
+              </td>
 
 
-                <button
-
-                  disabled
-
-                  class="
-                    ${statusClass("Тасалсан")}
-                    ${status === "Тасалсан" ? "active" : ""}
-                  ">
-
-                  Тасалсан
-
-                </button>
+              <td>
+                <b>
+                  ${escapeHtml(student)}
+                </b>
+              </td>
 
 
-                <button
+              <td>
 
-                  disabled
-
-                  class="
-                    ${statusClass("Чөлөөтэй")}
-                    ${status === "Чөлөөтэй" ? "active" : ""}
-                  ">
-
-                  Чөлөөтэй
-
-                </button>
+                <div class="status">
 
 
-              </div>
+                  <button
+                    type="button"
+                    disabled
+                    class="
+                      status-present
+                      ${status === "Ирсэн" ? "active" : ""}
+                    ">
 
-            </td>
+                    Ирсэн
 
-          </tr>
+                  </button>
 
-        `;
 
-      }
-    ).join("");
+                  <button
+                    type="button"
+                    disabled
+                    class="
+                      status-absent
+                      ${status === "Тасалсан" ? "active" : ""}
+                    ">
+
+                    Тасалсан
+
+                  </button>
+
+
+                  <button
+                    type="button"
+                    disabled
+                    class="
+                      status-free
+                      ${status === "Чөлөөтэй" ? "active" : ""}
+                    ">
+
+                    Чөлөөтэй
+
+                  </button>
+
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          `;
+
+        }
+      )
+      .join("");
 
 
   document.getElementById(
@@ -2176,8 +2262,9 @@ async function addStudent(){
 
   if(
     students.some(
-      s =>
-        s.toLowerCase() ===
+      student =>
+        student
+          .toLowerCase() ===
         name.toLowerCase()
     )
   ){
@@ -2204,9 +2291,12 @@ async function addStudent(){
     input.value = "";
 
   }
-  catch(e){
 
-    console.error(e);
+  catch(error){
+
+    console.error(
+      error
+    );
 
     alert(
       "Сурагч нэмэхэд алдаа гарлаа."
@@ -2226,24 +2316,29 @@ async function removeStudent(
       name +
       " -ийг жагсаалтаас хасах уу?"
     )
-  )
+  ){
+
     return;
+
+  }
 
 
   try{
 
     await studentsRef.set(
-
       students.filter(
-        s => s !== name
+        student =>
+          student !== name
       )
-
     );
 
   }
-  catch(e){
 
-    console.error(e);
+  catch(error){
+
+    console.error(
+      error
+    );
 
     alert(
       "Сурагч хасахад алдаа гарлаа."
@@ -2268,40 +2363,43 @@ function renderAdmin(){
     "adminList"
   ).innerHTML =
 
-    students.map(
-      (s,i) => `
+    students
+      .map(
+        (student,index) => `
 
-        <div
-          class="student-row">
-
-          <span>
-
-            ${i + 1}.
-            <b>
-              ${escapeHtml(s)}
-            </b>
-
-          </span>
+          <div
+            class="student-row">
 
 
-          <button
+            <span>
 
-            class="delete"
+              ${index + 1}.
+              <b>
+                ${escapeHtml(student)}
+              </b>
 
-            onclick="
-              removeStudent(
-                '${escapeJs(s)}'
-              )
-            ">
+            </span>
 
-            Хасах
 
-          </button>
+            <button
+              type="button"
+              class="delete"
+              onclick="
+                removeStudent(
+                  '${escapeJs(student)}'
+                )
+              ">
 
-        </div>
+              Хасах
 
-      `
-    ).join("");
+            </button>
+
+
+          </div>
+
+        `
+      )
+      .join("");
 
 }
 
@@ -2369,9 +2467,12 @@ function checkAdmin(){
 
     closeLogin();
 
-    showPage("admin");
+    showPage(
+      "admin"
+    );
 
   }
+
   else{
 
     document.getElementById(
@@ -2385,7 +2486,8 @@ function checkAdmin(){
 
 
 /* =====================================================
-   ⭐ 4 COLUMN EXPORT IMAGE
+   📸 IMAGE EXPORT
+   4 БАГАНА
 ===================================================== */
 
 async function downloadAttendanceImage(){
@@ -2409,10 +2511,6 @@ async function downloadAttendanceImage(){
     const data =
       getToday();
 
-
-    /* -----------------------------------------------
-       Export-д зориулсан тусгай хэсэг
-    ------------------------------------------------ */
 
     const exportBox =
       document.createElement(
@@ -2447,13 +2545,7 @@ async function downloadAttendanceImage(){
 
     /* TITLE */
 
-    const title =
-      document.createElement(
-        "div"
-      );
-
-
-    title.innerHTML = `
+    exportBox.innerHTML = `
 
       <div style="
         font-size:34px;
@@ -2479,37 +2571,13 @@ async function downloadAttendanceImage(){
     `;
 
 
-    exportBox.appendChild(
-      title
-    );
-
-
     /* STATS */
-
-    const statsBox =
-      document.createElement(
-        "div"
-      );
-
-
-    statsBox.style.display =
-      "grid";
-
-    statsBox.style.gridTemplateColumns =
-      "repeat(4,1fr)";
-
-    statsBox.style.gap =
-      "12px";
-
-    statsBox.style.marginBottom =
-      "25px";
-
 
     const present =
       students.filter(
-        s =>
+        student =>
           (
-            data[s] ||
+            data[student] ||
             "Ирсэн"
           ) === "Ирсэн"
       ).length;
@@ -2517,19 +2585,41 @@ async function downloadAttendanceImage(){
 
     const absent =
       students.filter(
-        s =>
-          data[s] === "Тасалсан"
+        student =>
+          data[student] ===
+          "Тасалсан"
       ).length;
 
 
     const free =
       students.filter(
-        s =>
-          data[s] === "Чөлөөтэй"
+        student =>
+          data[student] ===
+          "Чөлөөтэй"
       ).length;
 
 
-    statsBox.innerHTML = `
+    const stats =
+      document.createElement(
+        "div"
+      );
+
+
+    stats.style.display =
+      "grid";
+
+    stats.style.gridTemplateColumns =
+      "repeat(4,1fr)";
+
+    stats.style.gap =
+      "12px";
+
+    stats.style.marginBottom =
+      "25px";
+
+
+    stats.innerHTML = `
+
 
       <div style="
         background:#10141d;
@@ -2543,7 +2633,9 @@ async function downloadAttendanceImage(){
           color:#8f98aa;
           font-size:13px;
         ">
+
           Нийт сурагч
+
         </div>
 
         <div style="
@@ -2551,7 +2643,9 @@ async function downloadAttendanceImage(){
           font-weight:700;
           margin-top:6px;
         ">
+
           ${students.length}
+
         </div>
 
       </div>
@@ -2569,7 +2663,9 @@ async function downloadAttendanceImage(){
           color:#8f98aa;
           font-size:13px;
         ">
+
           Ирсэн
+
         </div>
 
         <div style="
@@ -2578,7 +2674,9 @@ async function downloadAttendanceImage(){
           font-weight:700;
           margin-top:6px;
         ">
+
           ${present}
+
         </div>
 
       </div>
@@ -2596,7 +2694,9 @@ async function downloadAttendanceImage(){
           color:#8f98aa;
           font-size:13px;
         ">
+
           Тасалсан
+
         </div>
 
         <div style="
@@ -2605,7 +2705,9 @@ async function downloadAttendanceImage(){
           font-weight:700;
           margin-top:6px;
         ">
+
           ${absent}
+
         </div>
 
       </div>
@@ -2623,7 +2725,9 @@ async function downloadAttendanceImage(){
           color:#8f98aa;
           font-size:13px;
         ">
+
           Чөлөөтэй
+
         </div>
 
         <div style="
@@ -2632,7 +2736,9 @@ async function downloadAttendanceImage(){
           font-weight:700;
           margin-top:6px;
         ">
+
           ${free}
+
         </div>
 
       </div>
@@ -2641,11 +2747,13 @@ async function downloadAttendanceImage(){
 
 
     exportBox.appendChild(
-      statsBox
+      stats
     );
 
 
-    /* STUDENT GRID */
+    /* =================================================
+       4 COLUMN STUDENT GRID
+    ================================================= */
 
     const grid =
       document.createElement(
@@ -2655,8 +2763,6 @@ async function downloadAttendanceImage(){
 
     grid.style.display =
       "grid";
-
-    /* ⭐ 4 БАГАНА */
 
     grid.style.gridTemplateColumns =
       "repeat(4, 1fr)";
@@ -2676,21 +2782,24 @@ async function downloadAttendanceImage(){
         let color =
           "#20c997";
 
-        let bg =
+
+        let background =
           "#10261f";
+
 
         let border =
           "#1d755c";
 
 
         if(
-          status === "Тасалсан"
+          status ===
+          "Тасалсан"
         ){
 
           color =
             "#ff5252";
 
-          bg =
+          background =
             "#291317";
 
           border =
@@ -2700,13 +2809,14 @@ async function downloadAttendanceImage(){
 
 
         if(
-          status === "Чөлөөтэй"
+          status ===
+          "Чөлөөтэй"
         ){
 
           color =
             "#ffc857";
 
-          bg =
+          background =
             "#29230f";
 
           border =
@@ -2722,7 +2832,7 @@ async function downloadAttendanceImage(){
 
 
         item.style.background =
-          bg;
+          background;
 
         item.style.border =
           "1px solid " +
@@ -2732,17 +2842,17 @@ async function downloadAttendanceImage(){
           "10px";
 
         item.style.padding =
-          "13px";
+          "12px";
 
         item.style.minHeight =
-          "65px";
+          "80px";
 
 
         item.innerHTML = `
 
           <div style="
-            font-size:12px;
             color:#8f98aa;
+            font-size:11px;
             margin-bottom:5px;
           ">
 
@@ -2752,10 +2862,10 @@ async function downloadAttendanceImage(){
 
 
           <div style="
-            font-size:15px;
-            font-weight:700;
             color:#ffffff;
-            margin-bottom:7px;
+            font-size:14px;
+            font-weight:700;
+            margin-bottom:8px;
             word-break:break-word;
           ">
 
@@ -2764,7 +2874,7 @@ async function downloadAttendanceImage(){
           </div>
 
 
-          <div style="
+          <span style="
             display:inline-block;
             padding:5px 9px;
             border-radius:7px;
@@ -2776,7 +2886,7 @@ async function downloadAttendanceImage(){
 
             ${status}
 
-          </div>
+          </span>
 
         `;
 
@@ -2805,6 +2915,7 @@ async function downloadAttendanceImage(){
       await html2canvas(
         exportBox,
         {
+
           backgroundColor:
             "#080a0f",
 
@@ -2815,6 +2926,7 @@ async function downloadAttendanceImage(){
           allowTaint:false,
 
           logging:false
+
         }
       );
 
@@ -2827,7 +2939,7 @@ async function downloadAttendanceImage(){
     /* BLOB */
 
     canvas.toBlob(
-      async function(blob){
+      async blob => {
 
         if(!blob){
 
@@ -2847,7 +2959,7 @@ async function downloadAttendanceImage(){
 
 
         /* =========================================
-           📱 IPHONE / ANDROID
+           IPHONE / ANDROID
         ========================================= */
 
         if(
@@ -2870,24 +2982,30 @@ async function downloadAttendanceImage(){
 
             if(
               navigator.canShare({
-                files:[file]
+                files:[
+                  file
+                ]
               })
             ){
 
               await navigator.share({
 
-                files:[file],
+                files:[
+                  file
+                ],
 
                 title:
                   "11Б ирцийн мэдээлэл"
 
               });
 
+
               return;
 
             }
 
           }
+
           catch(error){
 
             if(
@@ -2905,7 +3023,7 @@ async function downloadAttendanceImage(){
 
 
         /* =========================================
-           💻 PC FALLBACK
+           PC FALLBACK
         ========================================= */
 
         const url =
@@ -2958,6 +3076,7 @@ async function downloadAttendanceImage(){
     );
 
   }
+
   catch(error){
 
     console.error(
@@ -2979,9 +3098,9 @@ async function downloadAttendanceImage(){
    ESCAPE
 ===================================================== */
 
-function escapeJs(s){
+function escapeJs(text){
 
-  return s
+  return text
     .replace(
       /\\/g,
       "\\\\"
@@ -2994,9 +3113,9 @@ function escapeJs(s){
 }
 
 
-function escapeHtml(s){
+function escapeHtml(text){
 
-  return s
+  return text
     .replace(
       /&/g,
       "&amp;"
@@ -3028,23 +3147,25 @@ function escapeHtml(s){
 studentsRef.on(
   "value",
 
-  snap => {
+  snapshot => {
 
-    const val =
-      snap.val();
+    const value =
+      snapshot.val();
 
 
     if(
-      Array.isArray(val) &&
-      val.length
+      Array.isArray(value) &&
+      value.length
     ){
 
       students =
-        val;
+        value;
 
     }
 
-    else if(!val){
+    else if(
+      !value
+    ){
 
       students =
         [...initialStudents];
@@ -3060,14 +3181,10 @@ studentsRef.on(
 
       students =
         Object.values(
-          val
+          value
         );
 
     }
-
-
-    dataReady =
-      true;
 
 
     renderAttendance();
@@ -3076,10 +3193,11 @@ studentsRef.on(
 
   },
 
-  err => {
+
+  error => {
 
     console.error(
-      err
+      error
     );
 
 
@@ -3098,10 +3216,10 @@ studentsRef.on(
 attendanceRef.on(
   "value",
 
-  snap => {
+  snapshot => {
 
     attendance =
-      snap.val() || {};
+      snapshot.val() || {};
 
 
     renderAttendance();
