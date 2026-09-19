@@ -28,15 +28,45 @@
 
 .logo small{display:block;color:#697486;font-size:9px;letter-spacing:2px;margin-top:4px;font-weight:700}
 .logo span{color:var(--accent)}
+.menu-btn{
+  position:fixed;
+  top:18px;
+  left:18px;
+  z-index:100;
+  width:45px;
+  height:45px;
+  border:1px solid #303746;
+  border-radius:12px;
+  background:#10141d;
+  color:#fff;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.sidebar{
+  transition:transform .25s ease;
+}
+
+.sidebar.hidden{
+  transform:translateX(-100%);
+}
+
+.main{
+  transition:margin-left .25s ease,width .25s ease;
+}
+
+.main.full{
+  margin-left:0;
+  width:100%;
+}
 </style>
 </head>
-<body>
+<button class="menu-btn" onclick="toggleSidebar()">☰</button>
+<body> <div class="top-logo">
+  <img src="11B.png" alt="11Б">
+</div>
 <div class="app">
 <aside class="sidebar">
-  <div class="logo">
-  <img src="Pink White Retro Y2K Logo.png
-   " alt="11Б logo">
-</div>
   <div class="nav">
   <div class="nav">
   <button id="homeNav" class="active" onclick="showPage('home')">
@@ -136,7 +166,7 @@
             <th>Ирц</th>
           </tr>
         </thead>
-
+       
         <tbody id="historyBody"></tbody>
       </table>
     </div>
@@ -444,7 +474,13 @@ renderAdmin();
     alert("Зураг үүсгэхэд алдаа гарлаа.");
   }
 }
-  
+function toggleSidebar(){
+  const sidebar = document.querySelector(".sidebar");
+  const main = document.querySelector(".main");
+
+  sidebar.classList.toggle("hidden");
+  main.classList.toggle("full");
+} 
 </script>
 
 <div id="loginModal" class="modal">
