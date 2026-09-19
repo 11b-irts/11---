@@ -6,10 +6,8 @@
 
 <title>11Б Ирцийн мэдээлэл</title>
 
-<!-- html2canvas -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
@@ -157,18 +155,13 @@ body{
 
 /* =====================================================
    MAIN
-   Sidebar гарсан ч ҮНДСЭН хэсэг жижигрэхгүй
 ===================================================== */
 
 .main{
   margin-left:0;
-
   width:100%;
-
   min-height:100vh;
-
   padding:30px;
-
   max-width:none;
 }
 
@@ -192,19 +185,16 @@ body{
 
 .header{
   margin:40px auto 25px;
-
   max-width:1200px;
 }
 
 .header h1{
   margin:0 0 8px;
-
   font-size:32px;
 }
 
 .header p{
   margin:0;
-
   color:var(--muted);
 }
 
@@ -215,13 +205,10 @@ body{
 
 .stats{
   max-width:1200px;
-
   margin:0 auto 20px;
 
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
+  grid-template-columns:repeat(4,1fr);
 
   gap:14px;
 }
@@ -240,20 +227,14 @@ body{
 
 .stat .label{
   color:var(--muted);
-
   font-size:13px;
-
   margin-bottom:8px;
 }
 
 .stat .number{
   font-size:27px;
-
   font-weight:700;
 }
-
-
-/* Дээд 4 статистикийн өнгө */
 
 .stat.total{
   border-top:3px solid var(--accent);
@@ -320,15 +301,12 @@ body{
 
 .card-head h2{
   margin:0;
-
   font-size:18px;
 }
 
 .controls{
   display:flex;
-
   gap:10px;
-
   flex-wrap:wrap;
 }
 
@@ -393,32 +371,25 @@ button{
 
 .table-wrap{
   width:100%;
-
   overflow-x:auto;
 }
 
 table{
   width:100%;
-
   border-collapse:collapse;
-
   min-width:650px;
 }
 
 th,
 td{
   padding:14px 16px;
-
   border-bottom:1px solid #202531;
-
   text-align:left;
 }
 
 th{
   color:var(--muted);
-
   font-size:13px;
-
   font-weight:600;
 }
 
@@ -433,9 +404,7 @@ td{
 
 .status{
   display:flex;
-
   gap:7px;
-
   flex-wrap:wrap;
 }
 
@@ -454,7 +423,7 @@ td{
 }
 
 
-/* ---------- ИРСЭН ---------- */
+/* Ирсэн */
 
 .status-present{
   color:var(--green);
@@ -477,7 +446,7 @@ td{
 }
 
 
-/* ---------- ТАСАЛСАН ---------- */
+/* Тасалсан */
 
 .status-absent{
   color:var(--red);
@@ -500,7 +469,7 @@ td{
 }
 
 
-/* ---------- ЧӨЛӨӨТЭЙ ---------- */
+/* Чөлөөтэй */
 
 .status-free{
   color:var(--yellow);
@@ -522,12 +491,8 @@ td{
   color:#171100;
 }
 
-
-/* History дээр дарах боломжгүй */
-
 .status button:disabled{
   cursor:default;
-
   opacity:.95;
 }
 
@@ -538,9 +503,7 @@ td{
 
 .empty{
   text-align:center;
-
   color:var(--muted);
-
   padding:35px;
 }
 
@@ -565,10 +528,8 @@ td{
 
 .add-box{
   display:flex;
-
   gap:10px;
-
-  margin-bottom:20px;
+  margin-bottom:15px;
 }
 
 .add-box input{
@@ -589,6 +550,30 @@ td{
   border-bottom:1px solid #202531;
 }
 
+.admin-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.edit{
+  border:1px solid #39456b;
+
+  background:#171d31;
+
+  color:#9eb0ff;
+
+  padding:7px 11px;
+
+  border-radius:8px;
+
+  cursor:pointer;
+}
+
+.edit:hover{
+  background:#202945;
+}
+
 .delete{
   border:1px solid #572f36;
 
@@ -601,6 +586,30 @@ td{
   border-radius:8px;
 
   cursor:pointer;
+}
+
+.delete:hover{
+  background:#391b20;
+}
+
+.normalize{
+  margin-bottom:20px;
+
+  border:1px solid #39456b;
+
+  background:#171d31;
+
+  color:#9eb0ff;
+
+  padding:10px 13px;
+
+  border-radius:10px;
+
+  cursor:pointer;
+}
+
+.normalize:hover{
+  background:#202945;
 }
 
 
@@ -650,13 +659,11 @@ td{
 
 .modal-box input{
   width:100%;
-
   margin:12px 0;
 }
 
 .modal-actions{
   display:flex;
-
   gap:10px;
 }
 
@@ -680,9 +687,7 @@ td{
 
 .error{
   color:#ff6975;
-
   font-size:13px;
-
   min-height:18px;
 }
 
@@ -706,8 +711,7 @@ td{
   }
 
   .stats{
-    grid-template-columns:
-      repeat(2,1fr);
+    grid-template-columns:repeat(2,1fr);
   }
 
   .stat{
@@ -736,6 +740,15 @@ td{
     flex-direction:column;
   }
 
+  .student-row{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .admin-actions{
+    width:100%;
+  }
+
 }
 
 
@@ -745,9 +758,7 @@ td{
 
 .export-container{
   position:fixed;
-
   left:-100000px;
-
   top:0;
 }
 
@@ -758,9 +769,7 @@ td{
 <body>
 
 
-<!-- =====================================================
-     MENU
-===================================================== -->
+<!-- MENU -->
 
 <button
   class="menu-btn"
@@ -774,17 +783,13 @@ td{
 <div class="app">
 
 
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
+<!-- SIDEBAR -->
 
 <aside
   class="sidebar hidden"
   id="sidebar">
 
-
   <div class="nav">
-
 
     <button
       id="homeNav"
@@ -813,15 +818,12 @@ td{
 
     </button>
 
-
   </div>
 
 </aside>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+<!-- MAIN -->
 
 <main class="main">
 
@@ -834,7 +836,6 @@ td{
   id="home"
   class="page active">
 
-
   <div class="header">
 
     <h1>
@@ -846,10 +847,7 @@ td{
   </div>
 
 
-  <!-- STATS -->
-
   <div class="stats">
-
 
     <div class="stat total">
 
@@ -918,25 +916,18 @@ td{
 
     </div>
 
-
   </div>
 
 
-  <!-- ATTENDANCE -->
-
   <div class="card">
 
-
     <div class="card-head">
-
 
       <h2>
         Өнөөдрийн ирц
       </h2>
 
-
       <div class="controls">
-
 
         <input
           id="search"
@@ -953,34 +944,24 @@ td{
 
         </button>
 
-
       </div>
-
 
     </div>
 
 
     <div class="table-wrap">
 
-
       <table>
-
 
         <thead>
 
           <tr>
 
-            <th>
-              #
-            </th>
+            <th>#</th>
 
-            <th>
-              Сурагч
-            </th>
+            <th>Сурагч</th>
 
-            <th>
-              Ирц
-            </th>
+            <th>Ирц</th>
 
           </tr>
 
@@ -991,15 +972,11 @@ td{
           id="attendanceBody">
         </tbody>
 
-
       </table>
-
 
     </div>
 
-
   </div>
-
 
 </section>
 
@@ -1011,7 +988,6 @@ td{
 <section
   id="history"
   class="page">
-
 
   <div class="header">
 
@@ -1027,7 +1003,6 @@ td{
 
 
   <div class="stats">
-
 
     <div class="stat total">
 
@@ -1096,52 +1071,38 @@ td{
 
     </div>
 
-
   </div>
 
 
   <div class="card">
 
-
     <div class="card-head">
-
 
       <h2>
         Ирц сонгох
       </h2>
 
-
       <select
         id="historyDate"
         onchange="renderHistory()">
-
       </select>
-
 
     </div>
 
 
     <div class="table-wrap">
 
-
       <table>
-
 
         <thead>
 
           <tr>
 
-            <th>
-              #
-            </th>
+            <th>#</th>
 
-            <th>
-              Сурагч
-            </th>
+            <th>Сурагч</th>
 
-            <th>
-              Ирц
-            </th>
+            <th>Ирц</th>
 
           </tr>
 
@@ -1152,15 +1113,11 @@ td{
           id="historyBody">
         </tbody>
 
-
       </table>
-
 
     </div>
 
-
   </div>
-
 
 </section>
 
@@ -1172,7 +1129,6 @@ td{
 <section
   id="admin"
   class="page">
-
 
   <div class="header">
 
@@ -1190,13 +1146,19 @@ td{
   <div class="admin-box">
 
 
-    <div class="add-box">
+    <!-- НЭР НЭМЭХ -->
 
+    <div class="add-box">
 
       <input
         id="newStudent"
         type="text"
-        placeholder="Шинэ сурагчийн нэр">
+        placeholder="Шинэ сурагчийн нэр"
+        onkeydown="
+          if(event.key==='Enter'){
+            addStudent();
+          }
+        ">
 
 
       <button
@@ -1207,8 +1169,19 @@ td{
 
       </button>
 
-
     </div>
+
+
+    <!-- БҮХ НЭРИЙН ЦЭГИЙГ ЗАЙ БОЛГОХ -->
+
+    <button
+      type="button"
+      class="normalize"
+      onclick="normalizeAllNames()">
+
+      ✨ Бүх нэрний "."-ийг зай болгох
+
+    </button>
 
 
     <h3>
@@ -1224,9 +1197,7 @@ td{
 
     <div id="adminList"></div>
 
-
   </div>
-
 
 </section>
 
@@ -1244,9 +1215,7 @@ td{
   class="modal"
   id="loginModal">
 
-
   <div class="modal-box">
-
 
     <h2>
       🔐 Admin нэвтрэх
@@ -1264,7 +1233,11 @@ td{
       id="adminPassword"
       type="password"
       placeholder="Нууц үг"
-      onkeydown="if(event.key==='Enter') checkAdmin()">
+      onkeydown="
+        if(event.key==='Enter'){
+          checkAdmin();
+        }
+      ">
 
 
     <div
@@ -1274,7 +1247,6 @@ td{
 
 
     <div class="modal-actions">
-
 
       <button
         class="cancel"
@@ -1293,9 +1265,7 @@ td{
 
       </button>
 
-
     </div>
-
 
   </div>
 
@@ -1348,15 +1318,11 @@ const db =
 
 
 const studentsRef =
-  db.ref(
-    "class11B/students"
-  );
+  db.ref("class11B/students");
 
 
 const attendanceRef =
-  db.ref(
-    "class11B/attendance"
-  );
+  db.ref("class11B/attendance");
 
 
 /* =====================================================
@@ -1374,9 +1340,9 @@ const initialStudents = [
   "Мандуухай",
   "Мөнхсарнай",
   "Мөнх-Амьдрал",
-  "ННандин-Эрдэнэ",
-  "ҮНандин-Эрдэнэ",
-  "БНандин-Эрдэнэ",
+  "Н Нандин-Эрдэнэ",
+  "Ү Нандин-Эрдэнэ",
+  "Б Нандин-Эрдэнэ",
   "Ууганцэцэг",
   "Сэрдамба",
   "Сүрэнхорлоо",
@@ -1454,13 +1420,9 @@ document.getElementById(
 function toggleSidebar(){
 
   const sidebar =
-    document.getElementById(
-      "sidebar"
-    );
+    document.getElementById("sidebar");
 
-  sidebar.classList.toggle(
-    "hidden"
-  );
+  sidebar.classList.toggle("hidden");
 
 }
 
@@ -1475,17 +1437,13 @@ function showPage(page){
     .querySelectorAll(".page")
     .forEach(
       item =>
-        item.classList.remove(
-          "active"
-        )
+        item.classList.remove("active")
     );
 
 
   document
     .getElementById(page)
-    .classList.add(
-      "active"
-    );
+    .classList.add("active");
 
 
   document
@@ -1513,35 +1471,26 @@ function showPage(page){
 
 
   if(page === "home"){
-
     renderAttendance();
-
   }
 
 
   if(page === "history"){
 
     renderHistoryDates();
-
     renderHistory();
 
   }
 
 
   if(page === "admin"){
-
     renderAdmin();
-
   }
 
 
-  /* Сонгосны дараа Sidebar хаана */
-
   document
     .getElementById("sidebar")
-    .classList.add(
-      "hidden"
-    );
+    .classList.add("hidden");
 
 }
 
@@ -1552,32 +1501,17 @@ function showPage(page){
 
 function statusClass(status){
 
-  if(
-    status === "Ирсэн"
-  ){
-
+  if(status === "Ирсэн"){
     return "status-present";
-
   }
 
-
-  if(
-    status === "Тасалсан"
-  ){
-
+  if(status === "Тасалсан"){
     return "status-absent";
-
   }
 
-
-  if(
-    status === "Чөлөөтэй"
-  ){
-
+  if(status === "Чөлөөтэй"){
     return "status-free";
-
   }
-
 
   return "";
 
@@ -1589,32 +1523,19 @@ function statusClass(status){
 ===================================================== */
 
 function key(){
-
   return dateKey();
-
 }
 
 
 function getToday(){
-
-  return attendance[
-    key()
-  ] || {};
-
+  return attendance[key()] || {};
 }
 
 
-async function setStatus(
-  name,
-  status
-){
+async function setStatus(name,status){
 
-  if(
-    !attendance[key()]
-  ){
-
+  if(!attendance[key()]){
     attendance[key()] = {};
-
   }
 
 
@@ -1636,9 +1557,7 @@ async function setStatus(
 
   catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
 
     alert(
       "Ирц бүртгэхэд алдаа гарлаа."
@@ -1656,9 +1575,7 @@ async function setStatus(
 function renderAttendance(){
 
   const search =
-    document.getElementById(
-      "search"
-    );
+    document.getElementById("search");
 
 
   const query =
@@ -1707,18 +1624,15 @@ function renderAttendance(){
                 ${index + 1}
               </td>
 
-
               <td>
                 <b>
                   ${escapeHtml(student)}
                 </b>
               </td>
 
-
               <td>
 
                 <div class="status">
-
 
                   <button
                     type="button"
@@ -1773,7 +1687,6 @@ function renderAttendance(){
 
                   </button>
 
-
                 </div>
 
               </td>
@@ -1787,9 +1700,7 @@ function renderAttendance(){
       .join("");
 
 
-  if(
-    !filtered.length
-  ){
+  if(!filtered.length){
 
     body.innerHTML = `
 
@@ -1840,8 +1751,7 @@ function updateStats(){
         (
           data[student] ||
           "Ирсэн"
-        ) ===
-        "Ирсэн"
+        ) === "Ирсэн"
     ).length;
 
 
@@ -1873,14 +1783,11 @@ function updateStats(){
    HISTORY
 ===================================================== */
 
-function formatHistoryDate(
-  date
-){
+function formatHistoryDate(date){
 
   const d =
     new Date(
-      date +
-      "T00:00:00"
+      date + "T00:00:00"
     );
 
 
@@ -1917,19 +1824,15 @@ function renderHistoryDates(){
       date => {
 
         if(
-          !/^\d{4}-\d{2}-\d{2}$/
-            .test(date)
+          !/^\d{4}-\d{2}-\d{2}$/.test(date)
         ){
-
           return false;
-
         }
 
 
         const d =
           new Date(
-            date +
-            "T00:00:00"
+            date + "T00:00:00"
           );
 
 
@@ -1958,9 +1861,7 @@ function renderHistoryDates(){
     .reverse();
 
 
-  if(
-    dates.length === 0
-  ){
+  if(!dates.length){
 
     select.innerHTML = `
 
@@ -1998,19 +1899,11 @@ function renderHistoryDates(){
       .join("");
 
 
-  if(
-    dates.includes(current)
-  ){
-
-    select.value =
-      current;
-
+  if(dates.includes(current)){
+    select.value = current;
   }
   else{
-
-    select.value =
-      dates[0];
-
+    select.value = dates[0];
   }
 
 }
@@ -2091,9 +1984,7 @@ function renderHistory(){
 
 
   let present = 0;
-
   let absent = 0;
-
   let free = 0;
 
 
@@ -2107,30 +1998,18 @@ function renderHistory(){
             "Ирсэн";
 
 
-          if(
-            status === "Ирсэн"
-          ){
-
+          if(status === "Ирсэн"){
             present++;
-
           }
 
 
-          if(
-            status === "Тасалсан"
-          ){
-
+          if(status === "Тасалсан"){
             absent++;
-
           }
 
 
-          if(
-            status === "Чөлөөтэй"
-          ){
-
+          if(status === "Чөлөөтэй"){
             free++;
-
           }
 
 
@@ -2142,18 +2021,15 @@ function renderHistory(){
                 ${index + 1}
               </td>
 
-
               <td>
                 <b>
                   ${escapeHtml(student)}
                 </b>
               </td>
 
-
               <td>
 
                 <div class="status">
-
 
                   <button
                     type="button"
@@ -2192,7 +2068,6 @@ function renderHistory(){
                     Чөлөөтэй
 
                   </button>
-
 
                 </div>
 
@@ -2234,7 +2109,28 @@ function renderHistory(){
 
 
 /* =====================================================
-   ADMIN
+   NAME CLEANER
+===================================================== */
+
+function cleanStudentName(name){
+
+  return name
+    .replace(/\./g," ")
+    .replace(/\s+/g," ")
+    .trim();
+
+}
+
+
+function validStudentName(name){
+
+  return !/[\/#$\[\]]/.test(name);
+
+}
+
+
+/* =====================================================
+   ADD STUDENT
 ===================================================== */
 
 async function addStudent(){
@@ -2246,7 +2142,9 @@ async function addStudent(){
 
 
   const name =
-    input.value.trim();
+    cleanStudentName(
+      input.value
+    );
 
 
   if(!name){
@@ -2260,11 +2158,21 @@ async function addStudent(){
   }
 
 
+  if(!validStudentName(name)){
+
+    alert(
+      "Нэрэнд / # $ [ ] тэмдэгт ашиглаж болохгүй."
+    );
+
+    return;
+
+  }
+
+
   if(
     students.some(
       student =>
-        student
-          .toLowerCase() ===
+        student.toLowerCase() ===
         name.toLowerCase()
     )
   ){
@@ -2280,23 +2188,25 @@ async function addStudent(){
 
   try{
 
-    await studentsRef.set(
-      [
-        ...students,
-        name
-      ]
-    );
+    await studentsRef.set([
+      ...students,
+      name
+    ]);
 
 
     input.value = "";
+
+
+    alert(
+      name +
+      " амжилттай нэмэгдлээ."
+    );
 
   }
 
   catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
 
     alert(
       "Сурагч нэмэхэд алдаа гарлаа."
@@ -2307,9 +2217,377 @@ async function addStudent(){
 }
 
 
-async function removeStudent(
-  name
-){
+/* =====================================================
+   EDIT STUDENT
+===================================================== */
+
+async function editStudent(index){
+
+  const oldName =
+    students[index];
+
+
+  const enteredName =
+    prompt(
+      "Шинэ нэрийг оруулна уу:\n\n" +
+      "Жишээ:\n" +
+      "Н.Нандин-Эрдэнэ\n" +
+      "→ Н Нандин-Эрдэнэ",
+      oldName
+    );
+
+
+  if(enteredName === null){
+    return;
+  }
+
+
+  const newName =
+    cleanStudentName(
+      enteredName
+    );
+
+
+  if(!newName){
+
+    alert(
+      "Нэр хоосон байж болохгүй."
+    );
+
+    return;
+
+  }
+
+
+  if(!validStudentName(newName)){
+
+    alert(
+      "Нэрэнд / # $ [ ] тэмдэгт ашиглаж болохгүй."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    newName !== oldName &&
+    students.some(
+      (student,i) =>
+        i !== index &&
+        student.toLowerCase() ===
+        newName.toLowerCase()
+    )
+  ){
+
+    alert(
+      "Энэ нэр аль хэдийн бүртгэлтэй байна."
+    );
+
+    return;
+
+  }
+
+
+  if(newName === oldName){
+    return;
+  }
+
+
+  try{
+
+    const newStudents =
+      [...students];
+
+
+    newStudents[index] =
+      newName;
+
+
+    /*
+      Нэрийн жагсаалт шинэчлэх
+    */
+
+    await studentsRef.set(
+      newStudents
+    );
+
+
+    /*
+      Өмнөх бүх ирцийг
+      шинэ нэр рүү шилжүүлэх
+    */
+
+    const snapshot =
+      await attendanceRef.once(
+        "value"
+      );
+
+
+    const allAttendance =
+      snapshot.val() || {};
+
+
+    const updates = {};
+
+
+    Object.keys(
+      allAttendance
+    ).forEach(
+      date => {
+
+        const day =
+          allAttendance[date];
+
+
+        if(
+          day &&
+          Object.prototype.hasOwnProperty.call(
+            day,
+            oldName
+          )
+        ){
+
+          updates[
+            `${date}/${newName}`
+          ] =
+            day[oldName];
+
+
+          updates[
+            `${date}/${oldName}`
+          ] =
+            null;
+
+        }
+
+      }
+    );
+
+
+    if(
+      Object.keys(updates).length
+    ){
+
+      await attendanceRef.update(
+        updates
+      );
+
+    }
+
+
+    alert(
+      "Нэр амжилттай шинэчлэгдлээ."
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Нэр засах үед алдаа гарлаа."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   NORMALIZE ALL NAMES
+===================================================== */
+
+async function normalizeAllNames(){
+
+  const changed =
+    students.map(
+      student =>
+        cleanStudentName(student)
+    );
+
+
+  let hasChange = false;
+
+
+  for(
+    let i = 0;
+    i < students.length;
+    i++
+  ){
+
+    if(
+      students[i] !== changed[i]
+    ){
+
+      hasChange = true;
+      break;
+
+    }
+
+  }
+
+
+  if(!hasChange){
+
+    alert(
+      'Бүх нэр аль хэдийн зөв байна.'
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      'Бүх нэрний "." тэмдэгтийг зайгаар солих уу?'
+    )
+  ){
+
+    return;
+
+  }
+
+
+  try{
+
+    const unique =
+      new Set(
+        changed.map(
+          name =>
+            name.toLowerCase()
+        )
+      );
+
+
+    if(
+      unique.size !==
+      changed.length
+    ){
+
+      alert(
+        "Нэр солиход давхардсан нэр үүсэх тул үйлдлийг зогсоолоо."
+      );
+
+      return;
+
+    }
+
+
+    /*
+      Students шинэчлэх
+    */
+
+    await studentsRef.set(
+      changed
+    );
+
+
+    /*
+      Attendance шинэчлэх
+    */
+
+    const snapshot =
+      await attendanceRef.once(
+        "value"
+      );
+
+
+    const allAttendance =
+      snapshot.val() || {};
+
+
+    const updates = {};
+
+
+    students.forEach(
+      (oldName,index) => {
+
+        const newName =
+          changed[index];
+
+
+        if(
+          oldName === newName
+        ){
+          return;
+        }
+
+
+        Object.keys(
+          allAttendance
+        ).forEach(
+          date => {
+
+            const day =
+              allAttendance[date];
+
+
+            if(
+              day &&
+              Object.prototype.hasOwnProperty.call(
+                day,
+                oldName
+              )
+            ){
+
+              updates[
+                `${date}/${newName}`
+              ] =
+                day[oldName];
+
+
+              updates[
+                `${date}/${oldName}`
+              ] =
+                null;
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+
+    if(
+      Object.keys(updates).length
+    ){
+
+      await attendanceRef.update(
+        updates
+      );
+
+    }
+
+
+    alert(
+      'Бүх "." тэмдэгт зай болж өөрчлөгдлөө.'
+    );
+
+  }
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Нэрүүдийг шинэчлэхэд алдаа гарлаа."
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   REMOVE STUDENT
+===================================================== */
+
+async function removeStudent(name){
 
   if(
     !confirm(
@@ -2336,9 +2614,7 @@ async function removeStudent(
 
   catch(error){
 
-    console.error(
-      error
-    );
+    console.error(error);
 
     alert(
       "Сурагч хасахад алдаа гарлаа."
@@ -2348,6 +2624,10 @@ async function removeStudent(
 
 }
 
+
+/* =====================================================
+   ADMIN LIST
+===================================================== */
 
 function renderAdmin(){
 
@@ -2370,7 +2650,6 @@ function renderAdmin(){
           <div
             class="student-row">
 
-
             <span>
 
               ${index + 1}.
@@ -2381,19 +2660,35 @@ function renderAdmin(){
             </span>
 
 
-            <button
-              type="button"
-              class="delete"
-              onclick="
-                removeStudent(
-                  '${escapeJs(student)}'
-                )
-              ">
+            <div
+              class="admin-actions">
 
-              Хасах
+              <button
+                type="button"
+                class="edit"
+                onclick="
+                  editStudent(${index})
+                ">
 
-            </button>
+                ✏️ Засах
 
+              </button>
+
+
+              <button
+                type="button"
+                class="delete"
+                onclick="
+                  removeStudent(
+                    '${escapeJs(student)}'
+                  )
+                ">
+
+                🗑 Хасах
+
+              </button>
+
+            </div>
 
           </div>
 
@@ -2422,9 +2717,7 @@ function openAdmin(){
 
   document.getElementById(
     "loginModal"
-  ).classList.add(
-    "show"
-  );
+  ).classList.add("show");
 
 
   setTimeout(
@@ -2445,9 +2738,7 @@ function closeLogin(){
 
   document.getElementById(
     "loginModal"
-  ).classList.remove(
-    "show"
-  );
+  ).classList.remove("show");
 
 }
 
@@ -2467,9 +2758,7 @@ function checkAdmin(){
 
     closeLogin();
 
-    showPage(
-      "admin"
-    );
+    showPage("admin");
 
   }
 
@@ -2486,8 +2775,7 @@ function checkAdmin(){
 
 
 /* =====================================================
-   📸 IMAGE EXPORT
-   4 БАГАНА
+   IMAGE EXPORT
 ===================================================== */
 
 async function downloadAttendanceImage(){
@@ -2543,8 +2831,6 @@ async function downloadAttendanceImage(){
       "Arial, sans-serif";
 
 
-    /* TITLE */
-
     exportBox.innerHTML = `
 
       <div style="
@@ -2570,8 +2856,6 @@ async function downloadAttendanceImage(){
 
     `;
 
-
-    /* STATS */
 
     const present =
       students.filter(
@@ -2619,7 +2903,6 @@ async function downloadAttendanceImage(){
 
 
     stats.innerHTML = `
-
 
       <div style="
         background:#10141d;
@@ -2746,14 +3029,8 @@ async function downloadAttendanceImage(){
     `;
 
 
-    exportBox.appendChild(
-      stats
-    );
+    exportBox.appendChild(stats);
 
-
-    /* =================================================
-       4 COLUMN STUDENT GRID
-    ================================================= */
 
     const grid =
       document.createElement(
@@ -2792,8 +3069,7 @@ async function downloadAttendanceImage(){
 
 
         if(
-          status ===
-          "Тасалсан"
+          status === "Тасалсан"
         ){
 
           color =
@@ -2809,8 +3085,7 @@ async function downloadAttendanceImage(){
 
 
         if(
-          status ===
-          "Чөлөөтэй"
+          status === "Чөлөөтэй"
         ){
 
           color =
@@ -2891,25 +3166,19 @@ async function downloadAttendanceImage(){
         `;
 
 
-        grid.appendChild(
-          item
-        );
+        grid.appendChild(item);
 
       }
     );
 
 
-    exportBox.appendChild(
-      grid
-    );
+    exportBox.appendChild(grid);
 
 
     document.body.appendChild(
       exportBox
     );
 
-
-    /* CANVAS */
 
     const canvas =
       await html2canvas(
@@ -2936,8 +3205,6 @@ async function downloadAttendanceImage(){
     );
 
 
-    /* BLOB */
-
     canvas.toBlob(
       async blob => {
 
@@ -2958,10 +3225,6 @@ async function downloadAttendanceImage(){
           ".png";
 
 
-        /* =========================================
-           IPHONE / ANDROID
-        ========================================= */
-
         if(
           navigator.share &&
           navigator.canShare
@@ -2972,8 +3235,7 @@ async function downloadAttendanceImage(){
               [blob],
               fileName,
               {
-                type:
-                  "image/png"
+                type:"image/png"
               }
             );
 
@@ -2982,17 +3244,13 @@ async function downloadAttendanceImage(){
 
             if(
               navigator.canShare({
-                files:[
-                  file
-                ]
+                files:[file]
               })
             ){
 
               await navigator.share({
 
-                files:[
-                  file
-                ],
+                files:[file],
 
                 title:
                   "11Б ирцийн мэдээлэл"
@@ -3022,25 +3280,16 @@ async function downloadAttendanceImage(){
         }
 
 
-        /* =========================================
-           PC FALLBACK
-        ========================================= */
-
         const url =
-          URL.createObjectURL(
-            blob
-          );
+          URL.createObjectURL(blob);
 
 
         const link =
-          document.createElement(
-            "a"
-          );
+          document.createElement("a");
 
 
         link.href =
           url;
-
 
         link.download =
           fileName;
@@ -3101,14 +3350,8 @@ async function downloadAttendanceImage(){
 function escapeJs(text){
 
   return text
-    .replace(
-      /\\/g,
-      "\\\\"
-    )
-    .replace(
-      /'/g,
-      "\\'"
-    );
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
 
 }
 
@@ -3116,26 +3359,11 @@ function escapeJs(text){
 function escapeHtml(text){
 
   return text
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
@@ -3163,9 +3391,7 @@ studentsRef.on(
 
     }
 
-    else if(
-      !value
-    ){
+    else if(!value){
 
       students =
         [...initialStudents];
@@ -3180,9 +3406,7 @@ studentsRef.on(
     else{
 
       students =
-        Object.values(
-          value
-        );
+        Object.values(value);
 
     }
 
@@ -3193,13 +3417,9 @@ studentsRef.on(
 
   },
 
-
   error => {
 
-    console.error(
-      error
-    );
-
+    console.error(error);
 
     alert(
       "Firebase database-тэй холбогдож чадсангүй. Firebase Rules болон database URL-ээ шалгана уу."
@@ -3227,13 +3447,9 @@ attendanceRef.on(
 
     if(
       document
-        .getElementById(
-          "history"
-        )
+        .getElementById("history")
         .classList
-        .contains(
-          "active"
-        )
+        .contains("active")
     ){
 
       renderHistoryDates();
@@ -3250,9 +3466,7 @@ attendanceRef.on(
    START
 ===================================================== */
 
-showPage(
-  "home"
-);
+showPage("home");
 
 </script>
 
