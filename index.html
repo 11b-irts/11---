@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tumee • 11Б Ирцийн систем</title>
+<title>11Б ирцийн мэдээлэл</title>
 <style>
 :root{--bg:#080a0f;--card:#10141d;--card2:#151a25;--text:#f4f6fb;--muted:#8f98aa;--accent:#7c5cff;--green:#25d695;--red:#ff5d73;--yellow:#ffca55;--blue:#4ea1ff}
 *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 80% 0%,#19122c 0,#080a0f 42%);color:var(--text);min-height:100vh}
@@ -62,22 +62,30 @@
 </main>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
 <script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDJvrEO4oMfEZVa81hW7ciC_KlaE0cl9aA",
+  authDomain: "b-irts.firebaseapp.com",
+  databaseURL: "https://b-irts-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "b-irts",
+  storageBucket: "b-irts.firebasestorage.app",
+  messagingSenderId: "812154469314",
+  appId: "1:812154469314:web:9cb88abcdf1afc74a9b45b",
+  measurementId: "G-KSPCFLVDC5"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const studentsRef = db.ref("class11B/students");
+const attendanceRef = db.ref("class11B/attendance");
+
 const initialStudents = ["Анхбаяр", "Анужин", "Баасаннэмэх", "Ганбаатар", "Догсүнжав", "Дөлбадрах", "Мандуухай", "Мөнхсарнай", "Мөнх-Амьдрал", "Н.Нандин-Эрдэнэ", "Ү.Нандин-Эрдэнэ", "Б.Нандин-Эрдэнэ", "Ууганцэцэг", "Сэрдамба", "Сүрэнхорлоо", "Очиржав", "Шинэбаяр", "Төрболд", "Төгөлдөр", "Пүрэвваанчиг", "Хан-Учрал", "Халиунаа", "Хатанзориг", "Хөгжилболд", "Хулан", "Чандмань-Эрдэнэ", "Чингүүн", "Цэлмүүн", "Энх-Уянга", "Энх-Орчлон", "Энхмэнд"];
 const ADMIN_PASSWORD = "0020";
-const missingInitial = initialStudents.filter(n => !students.includes(n));
-if(missingInitial.length){
-  students = [...initialStudents, ...students.filter(n => !initialStudents.includes(n))];
-  localStorage.setItem("class11B_students",JSON.stringify(students));
-}
-
-let storedStudents = JSON.parse(localStorage.getItem("class11B_students") || "null");
-let students = Array.isArray(storedStudents) && storedStudents.length ? storedStudents : [...initialStudents];
-let attendance = JSON.parse(localStorage.getItem("class11B_attendance") || "{}");
-if (!Array.isArray(students) || students.length < initialStudents.length) {
-  students = [...initialStudents, ...(Array.isArray(students) ? students.filter(n => !initialStudents.includes(n)) : [])];
-  localStorage.setItem("class11B_students", JSON.stringify(students));
-}
+let students = [];
+let attendance = {};
+let dataReady = false;
 
 function dateKey(){ return new Date().toISOString().slice(0,10); }
 function todayText(){ return new Date().toLocaleDateString("mn-MN",{year:"numeric",month:"long",day:"numeric",weekday:"long"}); }
@@ -92,12 +100,19 @@ function showPage(p){
 }
 function key(){return dateKey();}
 function getToday(){return attendance[key()]||{};}
-function setStatus(name,status){
+
+async function setStatus(name,status){
  if(!attendance[key()]) attendance[key()]={};
  attendance[key()][name]=status;
- localStorage.setItem("class11B_attendance",JSON.stringify(attendance));
- renderAttendance();
+ try {
+   await attendanceRef.child(key()).child(name).set(status);
+   renderAttendance();
+ } catch(e) {
+   alert("Ирц хадгалахад алдаа гарлаа. Firebase Rules-ээ шалгана уу.");
+   console.error(e);
+ }
 }
+
 function renderAttendance(){
  const q=(document.getElementById("search").value||"").toLowerCase();
  const data=getToday();
@@ -116,31 +131,35 @@ function updateStats(){
  document.getElementById("total").textContent=students.length;
  document.getElementById("present").textContent=students.filter(s=>(data[s]||"Ирсэн")==="Ирсэн").length;
  document.getElementById("absent").textContent=students.filter(s=>data[s]==="Тасалсан").length;
-
 }
 function escapeJs(s){return s.replace(/\\/g,"\\\\").replace(/'/g,"\\'");}
-function addStudent(){
+
+async function addStudent(){
  const input=document.getElementById("newStudent"), name=input.value.trim();
  if(!name)return alert("Сурагчийн нэр оруулна уу.");
  if(students.some(s=>s.toLowerCase()===name.toLowerCase())) return alert("Энэ нэр бүртгэлтэй байна.");
- students.push(name); localStorage.setItem("class11B_students",JSON.stringify(students));
- input.value=""; renderAdmin(); renderAttendance();
+ try {
+   await studentsRef.set([...students,name]);
+   input.value="";
+ } catch(e) {
+   alert("Сурагч нэмэхэд алдаа гарлаа. Firebase Rules-ээ шалгана уу.");
+   console.error(e);
+ }
 }
-function removeStudent(name){
+async function removeStudent(name){
  if(!confirm(name+"-ийг жагсаалтаас хасах уу?")) return;
- students=students.filter(s=>s!==name);
- localStorage.setItem("class11B_students",JSON.stringify(students));
- renderAdmin(); renderAttendance();
+ try {
+   await studentsRef.set(students.filter(s=>s!==name));
+ } catch(e) {
+   alert("Сурагч хасахад алдаа гарлаа. Firebase Rules-ээ шалгана уу.");
+   console.error(e);
+ }
 }
 function renderAdmin(){
  document.getElementById("adminCount").textContent="("+students.length+")";
  document.getElementById("adminList").innerHTML=students.map((s,i)=>`<div class="student-row"><span>${i+1}. <b>${s}</b></span><button class="delete" onclick="removeStudent('${escapeJs(s)}')">Хасах</button></div>`).join("");
 }
-function saveAttendance(){
- localStorage.setItem("class11B_students",JSON.stringify(students));
- localStorage.setItem("class11B_attendance",JSON.stringify(attendance));
- alert("Өнөөдрийн ирц хадгалагдлаа.");
-}
+function saveAttendance(){ alert("Ирц Firebase дээр автоматаар хадгалагддаг."); }
 
 function openAdmin(){
  document.getElementById("adminPassword").value="";
@@ -155,7 +174,31 @@ function checkAdmin(){
  else document.getElementById("loginError").textContent="Нууц үг буруу байна.";
 }
 
-renderAttendance(); renderAdmin();
+studentsRef.on("value", snap=>{
+ const val=snap.val();
+ if(Array.isArray(val) && val.length){
+   students=val;
+ } else if(!val){
+   students=[...initialStudents];
+   studentsRef.set(students);
+ } else {
+   students=Object.values(val);
+ }
+ dataReady=true;
+ renderAttendance();
+ renderAdmin();
+}, err=>{
+ console.error(err);
+ alert("Firebase database-тэй холбогдож чадсангүй. Firebase Rules болон database URL-ээ шалгана уу.");
+});
+
+attendanceRef.on("value", snap=>{
+ attendance=snap.val() || {};
+ renderAttendance();
+});
+
+renderAttendance();
+renderAdmin();
 </script>
 
 <div id="loginModal" class="modal">
