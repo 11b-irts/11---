@@ -1,31 +1,84 @@
 <!DOCTYPE html>
 <html lang="mn">
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>11Б ирцийн мэдээлэл</title>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
 <style>
-:root{--bg:#080a0f;--card:#10141d;--card2:#151a25;--text:#f4f6fb;--muted:#8f98aa;--accent:#7c5cff;--green:#25d695;--red:#ff5d73;--yellow:#ffca55;--blue:#4ea1ff}
-*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 80% 0%,#19122c 0,#080a0f 42%);color:var(--text);min-height:100vh}
-.app{display:flex;min-height:100vh}.sidebar{width:245px;background:rgba(12,14,20,.92);border-right:1px solid #252a36;padding:24px 16px;position:fixed;height:100vh}
-.logo{font-weight:800;font-size:22px;padding:8px 12px 25px}.logo span{color:var(--accent)}
-.nav button{width:100%;background:none;border:0;color:var(--muted);padding:13px 14px;margin:4px 0;text-align:left;border-radius:12px;font-size:15px;cursor:pointer}.nav button.active,.nav button:hover{background:#191d29;color:#fff}.main{margin-left:245px;width:calc(100% - 245px);padding:30px;max-width:1400px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}.title h1{margin:0 0 5px;font-size:30px}.title p{margin:0;color:var(--muted)}.date{background:var(--card);border:1px solid #252b38;padding:10px 14px;border-radius:11px;color:#cbd2df}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:22px}.card{background:linear-gradient(145deg,var(--card),#0d1017);border:1px solid #252b38;border-radius:17px;padding:20px}.label{color:var(--muted);font-size:13px}.num{font-size:29px;font-weight:800;margin-top:8px}.green{color:var(--green)}.red{color:var(--red)}.yellow{color:var(--yellow)}.blue{color:var(--blue)}
-.panel{background:rgba(16,20,29,.88);border:1px solid #252b38;border-radius:18px;padding:20px;margin-bottom:20px}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}.panel h2{font-size:18px;margin:0}.tools{display:flex;gap:9px;flex-wrap:wrap}input,select{background:#0b0e14;border:1px solid #2a3040;color:#fff;padding:11px 12px;border-radius:10px;outline:none}button.primary{background:var(--accent);color:white;border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:720px}.table th,.table td{text-align:left;padding:13px 10px;border-bottom:1px solid #242936;font-size:14px}.table th{color:#8e98aa;font-weight:600}.status{display:flex;gap:7px;flex-wrap:wrap}.status button{border:1px solid #303746;background:#11151e;color:#aeb6c5;border-radius:9px;padding:7px 9px;cursor:pointer}.status button.active[data-s="Ирсэн"]{background:#123c30;color:#42e4a6;border-color:#216b54}.status button.active[data-s="Тасалсан"]{background:#431d28;color:#ff7488;border-color:#733141}.status button.active[data-s="Хоцорсон"]{background:#493919;color:#ffd466;border-color:#765e24}.status button.active[data-s="Чөлөөтэй"]{background:#172f4a;color:#67b2ff;border-color:#285684}
-.page{display:none}.page.active{display:block}.admin-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.student-row{display:flex;justify-content:space-between;align-items:center;background:#0d1119;border:1px solid #252b38;padding:12px 14px;border-radius:11px}.delete{border:0;background:#321923;color:#ff7186;padding:7px 10px;border-radius:8px;cursor:pointer}
-.notice{color:var(--muted);font-size:13px;margin-top:8px}.empty{padding:35px;text-align:center;color:var(--muted)}
-@media(max-width:800px){.sidebar{width:70px;padding:18px 8px}.logo{font-size:16px;text-align:center;padding:8px 0 20px}.logo span{display:none}.nav button{font-size:0;text-align:center}.nav button:first-letter{font-size:20px}.main{margin-left:70px;width:calc(100% - 70px);padding:18px}.cards{grid-template-columns:repeat(2,1fr)}.admin-list{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}}
+:root{
+  --bg:#080a0f;
+  --card:#10141d;
+  --text:#f4f6fb;
+  --muted:#8f98aa;
+  --accent:#7c5cff;
+  --green:#25d695;
+  --red:#ff5d73;
+  --yellow:#ffca55;
+  --blue:#4ea1ff;
+}
 
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);z-index:50;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.login-box{width:100%;max-width:390px;background:#10141d;border:1px solid #303746;border-radius:20px;padding:28px;box-shadow:0 20px 70px rgba(0,0,0,.55)}.login-icon{font-size:34px;margin-bottom:12px}.login-box h2{margin:0 0 8px}.login-box p{color:#8f98aa;font-size:14px;margin:0 0 20px}.login-box input{width:100%;margin-bottom:10px}.login-btn{width:100%;margin-top:4px}.cancel-btn{width:100%;margin-top:9px;background:#171c26;border:1px solid #2b3240;color:#c3cad5;padding:11px;border-radius:10px;cursor:pointer}.login-box #loginError{color:#ff7186;font-size:13px;min-height:20px;margin-top:10px}
+*{box-sizing:border-box}
 
-.logo small{display:block;color:#697486;font-size:9px;letter-spacing:2px;margin-top:4px;font-weight:700}
-.logo span{color:var(--accent)}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:radial-gradient(circle at 80% 0%,#19122c 0,#080a0f 42%);
+  color:var(--text);
+  min-height:100vh;
+}
+
+.app{
+  min-height:100vh;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+  width:245px;
+  background:rgba(12,14,20,.96);
+  border-right:1px solid #252a36;
+  padding:24px 16px;
+  position:fixed;
+  top:0;
+  left:0;
+  height:100vh;
+  z-index:999;
+  transition:transform .25s ease;
+}
+
+.sidebar.hidden{
+  transform:translateX(-100%);
+}
+
+.nav button{
+  width:100%;
+  background:none;
+  border:0;
+  color:var(--muted);
+  padding:13px 14px;
+  margin:4px 0;
+  text-align:left;
+  border-radius:12px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.nav button.active,
+.nav button:hover{
+  background:#191d29;
+  color:#fff;
+}
+
+/* ================= MENU BUTTON ================= */
+
 .menu-btn{
   position:fixed;
   top:18px;
   left:18px;
-  z-index:100;
+  z-index:2000;
   width:45px;
   height:45px;
   border:1px solid #303746;
@@ -36,155 +89,684 @@
   cursor:pointer;
 }
 
-.sidebar{
-  transition:transform .25s ease;
+.menu-btn:hover{
+  background:#191d29;
 }
 
-.sidebar.hidden{
-  transform:translateX(-100%);
-}
+/* ================= MAIN ================= */
 
 .main{
+  margin-left:245px;
+  width:calc(100% - 245px);
+  padding:30px;
+  max-width:1400px;
   transition:margin-left .25s ease,width .25s ease;
 }
-<main class="main full">
-  
-.top-logo{
-  position:fixed;
-  top:15px;
-  left:15px;
-  width:60px;
-  height:60px;
-  z-index:200;
+
+.main.full{
+  margin-left:0;
+  width:100%;
+  max-width:none;
 }
-.sidebar{
+
+/* ================= TOP ================= */
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.title h1{
+  margin:0 0 5px;
+  font-size:30px;
+}
+
+.title p{
+  margin:0;
+  color:var(--muted);
+}
+
+.date{
+  background:var(--card);
+  border:1px solid #252b38;
+  padding:10px 14px;
+  border-radius:11px;
+  color:#cbd2df;
+}
+
+/* ================= CARDS ================= */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:22px;
+}
+
+.card{
+  background:linear-gradient(145deg,var(--card),#0d1017);
+  border:1px solid #252b38;
+  border-radius:17px;
+  padding:20px;
+}
+
+.label{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.num{
+  font-size:29px;
+  font-weight:800;
+  margin-top:8px;
+}
+
+.green{color:var(--green)}
+.red{color:var(--red)}
+.yellow{color:var(--yellow)}
+.blue{color:var(--blue)}
+
+/* ================= PANEL ================= */
+
+.panel{
+  background:rgba(16,20,29,.88);
+  border:1px solid #252b38;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.panel h2{
+  font-size:18px;
+  margin:0;
+}
+
+.tools{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+input,
+select{
+  background:#0b0e14;
+  border:1px solid #2a3040;
+  color:#fff;
+  padding:11px 12px;
+  border-radius:10px;
+  outline:none;
+}
+
+button.primary{
+  background:var(--accent);
+  color:white;
+  border:0;
+  border-radius:10px;
+  padding:11px 15px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+/* ================= TABLE ================= */
+
+.table-wrap{
+  overflow:auto;
+}
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:720px;
+}
+
+.table th,
+.table td{
+  text-align:left;
+  padding:13px 10px;
+  border-bottom:1px solid #242936;
+  font-size:14px;
+}
+
+.table th{
+  color:#8e98aa;
+  font-weight:600;
+}
+
+/* ================= STATUS ================= */
+
+.status{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.status button{
+  border:1px solid #303746;
+  background:#11151e;
+  color:#aeb6c5;
+  border-radius:9px;
+  padding:7px 9px;
+  cursor:pointer;
+}
+
+.status button.active[data-s="Ирсэн"]{
+  background:#123c30;
+  color:#42e4a6;
+  border-color:#216b54;
+}
+
+.status button.active[data-s="Тасалсан"]{
+  background:#431d28;
+  color:#ff7488;
+  border-color:#733141;
+}
+
+.status button.active[data-s="Чөлөөтэй"]{
+  background:#172f4a;
+  color:#67b2ff;
+  border-color:#285684;
+}
+
+/* ================= PAGES ================= */
+
+.page{
   display:none;
 }
 
-.main{
-  margin-left:0;
-  width:100%
+.page.active{
+  display:block;
+}
+
+/* ================= ADMIN ================= */
+
+.admin-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.student-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#0d1119;
+  border:1px solid #252b38;
+  padding:12px 14px;
+  border-radius:11px;
+}
+
+.delete{
+  border:0;
+  background:#321923;
+  color:#ff7186;
+  padding:7px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.notice{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:8px;
+}
+
+.empty{
+  padding:35px;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* ================= LOGIN ================= */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(7px);
+  z-index:5000;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.login-box{
+  width:100%;
+  max-width:390px;
+  background:#10141d;
+  border:1px solid #303746;
+  border-radius:20px;
+  padding:28px;
+  box-shadow:0 20px 70px rgba(0,0,0,.55);
+}
+
+.login-icon{
+  font-size:34px;
+  margin-bottom:12px;
+}
+
+.login-box h2{
+  margin:0 0 8px;
+}
+
+.login-box p{
+  color:#8f98aa;
+  font-size:14px;
+  margin:0 0 20px;
+}
+
+.login-box input{
+  width:100%;
+  margin-bottom:10px;
+}
+
+.login-btn{
+  width:100%;
+  margin-top:4px;
+}
+
+.cancel-btn{
+  width:100%;
+  margin-top:9px;
+  background:#171c26;
+  border:1px solid #2b3240;
+  color:#c3cad5;
+  padding:11px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.login-box #loginError{
+  color:#ff7186;
+  font-size:13px;
+  min-height:20px;
+  margin-top:10px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+  .sidebar{
+    width:245px;
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+    padding:18px;
+  }
+
+  .cards{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .admin-list{
+    grid-template-columns:1fr;
+  }
+
+  .top{
+    align-items:flex-start;
+    flex-direction:column;
+  }
 }
 </style>
 </head>
-<body> 
+
+<body>
+
+<!-- 3 ЗУРААС -->
 <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
 <div class="app">
-<aside class="sidebar">
-  <div class="nav">
-  <div class="nav">
-  <button id="homeNav" class="active" onclick="showPage('home')">
-    🏠 &nbsp; Home
-  </button>
 
-  <button id="historyNav" onclick="showPage('history')">
-    📅 &nbsp; Өмнөх ирц
-  </button>
+  <!-- SIDEBAR -->
+  <aside class="sidebar hidden" id="sidebar">
 
-  <button id="adminNav" onclick="openAdmin()">
-    🦹🏻‍♂️ &nbsp; Admin
-  </button>
+    <div class="nav">
+
+      <button id="homeNav"
+              class="active"
+              onclick="showPage('home')">
+        🏠 &nbsp; Home
+      </button>
+
+      <button id="historyNav"
+              onclick="showPage('history')">
+        📅 &nbsp; Өмнөх ирц
+      </button>
+
+      <button id="adminNav"
+              onclick="openAdmin()">
+        🦹🏻‍♂️ &nbsp; Admin
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+  <main class="main full">
+
+    <!-- HOME -->
+    <section id="home" class="page active">
+
+      <div class="top">
+
+        <div class="title">
+          <h1>11Б ирцийн мэдээлэл</h1>
+          <p>Өнөөдрийн сурагчдын ирцийг бүртгэнэ.</p>
+        </div>
+
+        <div class="date" id="today"></div>
+
+      </div>
+
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="label">Нийт сурагч</div>
+          <div class="num blue" id="total">0</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Ирсэн</div>
+          <div class="num green" id="present">0</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Тасалсан</div>
+          <div class="num red" id="absent">0</div>
+        </div>
+
+        <div class="card">
+          <div class="label">Чөлөөтэй</div>
+          <div class="num yellow" id="free">0</div>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <h2>Өнөөдрийн ирц</h2>
+
+          <div class="tools">
+
+            <input
+              id="search"
+              placeholder="Сурагч хайх..."
+              oninput="renderAttendance()">
+
+            <button
+              class="primary"
+              onclick="saveAttendance()">
+              Хадгалах
+            </button>
+
+            <button
+              class="primary"
+              onclick="downloadAttendanceImage()">
+              📸 Зураг татах
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table class="table">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Сурагч</th>
+                <th>Ирц</th>
+              </tr>
+            </thead>
+
+            <tbody id="attendanceBody"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ADMIN -->
+    <section id="admin" class="page">
+
+      <div class="top">
+
+        <div class="title">
+          <h1>Admin</h1>
+          <p>11Б ангийн сурагчдыг нэмэх, хасах.</p>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-head">
+          <h2>Сурагч нэмэх</h2>
+        </div>
+
+        <div class="tools">
+
+          <input
+            id="newStudent"
+            placeholder="Сурагчийн нэр">
+
+          <button
+            class="primary"
+            onclick="addStudent()">
+            + Сурагч нэмэх
+          </button>
+
+        </div>
+
+        <div class="notice">
+          Энд нэмсэн сурагч Home хэсэгт автоматаар гарна.
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <h2>
+            Сурагчдын жагсаалт
+            <span id="adminCount"></span>
+          </h2>
+
+        </div>
+
+        <div
+          class="admin-list"
+          id="adminList">
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- HISTORY -->
+    <section id="history" class="page">
+
+      <div class="top">
+
+        <div class="title">
+          <h1>Өмнөх ирц</h1>
+          <p>Сүүлийн 30 хоногийн ирцийг харах.</p>
+        </div>
+
+        <div class="tools">
+
+          <select
+            id="historyDate"
+            onchange="renderHistory()">
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="label">Нийт сурагч</div>
+          <div
+            class="num blue"
+            id="historyTotal">
+            0
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label">Ирсэн</div>
+          <div
+            class="num green"
+            id="historyPresent">
+            0
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label">Тасалсан</div>
+          <div
+            class="num red"
+            id="historyAbsent">
+            0
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label">Чөлөөтэй</div>
+          <div
+            class="num yellow"
+            id="historyFree">
+            0
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panel-head">
+
+          <h2 id="historyTitle">
+            Өмнөх өдрийн ирц
+          </h2>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table class="table">
+
+            <thead>
+
+              <tr>
+                <th>#</th>
+                <th>Сурагч</th>
+                <th>Ирц</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="historyBody"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
 </div>
-</aside>
 
-<main class="main">
-<section id="home" class="page active">
-  <div class="top">
-    <div class="title"><h1>11Б ирцийн мэдээлэл</h1><p>Өнөөдрийн сурагчдын ирцийг бүртгэнэ.</p></div>
-    <div class="date" id="today"></div>
+
+<!-- LOGIN MODAL -->
+
+<div id="loginModal" class="modal">
+
+  <div class="login-box">
+
+    <div class="login-icon">🔐</div>
+
+    <h2>Admin нэвтрэх</h2>
+
+    <p>
+      Admin хэсэгт орохын тулд нууц үгээ оруулна уу.
+    </p>
+
+    <input
+      id="adminPassword"
+      type="password"
+      placeholder="Нууц үг"
+      onkeydown="if(event.key==='Enter')checkAdmin()">
+
+    <button
+      class="primary login-btn"
+      onclick="checkAdmin()">
+      Нэвтрэх
+    </button>
+
+    <button
+      class="cancel-btn"
+      onclick="closeLogin()">
+      Буцах
+    </button>
+
+    <div id="loginError"></div>
+
   </div>
-  <div class="cards">
-    <div class="card"><div class="label">Нийт сурагч</div><div class="num blue" id="total">0</div></div>
-    <div class="card"><div class="label">Ирсэн</div><div class="num green" id="present">0</div></div>
-    <div class="card"><div class="label">Тасалсан</div><div class="num red" id="absent">0</div></div>
-    <div class="card"><div class="label">Чөлөөтэй</div><div class="num yellow" id="free">0</div></div>
-  </div>
-  
-  <div class="panel">
-    <div class="panel-head"><h2>Өнөөдрийн ирц</h2><div class="tools"><input id="search" placeholder="Сурагч хайх..." oninput="renderAttendance()">
-    <button class="primary" onclick="saveAttendance()">Хадгалах</button></div></div>
-    <button class="primary" onclick="downloadAttendanceImage()">
-  📸 Зураг татах
-</button>
+
 </div>
-  
-    <div class="table-wrap"><table class="table"><thead><tr><th>#</th><th>Сурагч</th><th>Ирц</th></tr></thead><tbody id="attendanceBody"></tbody></table></div>
-  </div>
-</section>
 
-<section id="admin" class="page">
-  <div class="top"><div class="title"><h1>Admin</h1><p>11Б ангийн сурагчдыг нэмэх, хасах.</p></div></div>
-  <div class="panel">
-    <div class="panel-head"><h2>Сурагч нэмэх</h2></div>
-    <div class="tools"><input id="newStudent" placeholder="Сурагчийн нэр"><button class="primary" onclick="addStudent()">+ Сурагч нэмэх</button></div>
-    <div class="notice">Энд нэмсэн сурагч Home хэсэгт автоматаар гарна.</div>
-  </div>
-  <div class="panel"><div class="panel-head"><h2>Сурагчдын жагсаалт <span id="adminCount"></span></h2></div><div class="admin-list" id="adminList"></div></div>
-</section>
-  
-<section id="history" class="page">
-  <div class="top">
-    <div class="title">
-      <h1>Өмнөх ирц</h1>
-      <p>Сүүлийн 30 хоногийн ирцийг харах.</p>
-    </div>
 
-    <div class="tools">
-      <select id="historyDate" onchange="renderHistory()"></select>
-    </div>
-  </div>
-
-  <div class="cards">
-    <div class="card">
-      <div class="label">Нийт сурагч</div>
-      <div class="num blue" id="historyTotal">0</div>
-    </div>
-
-    <div class="card">
-      <div class="label">Ирсэн</div>
-      <div class="num green" id="historyPresent">0</div>
-    </div>
-
-    <div class="card">
-      <div class="label">Тасалсан</div>
-      <div class="num red" id="historyAbsent">0</div>
-    </div>
-
-    <div class="card">
-      <div class="label">Чөлөөтэй</div>
-      <div class="num yellow" id="historyFree">0</div>
-    </div>
-  </div>
-
-  <div class="panel">
-    <div class="panel-head">
-      <h2 id="historyTitle">Өмнөх өдрийн ирц</h2>
-    </div>
-
-    <div class="table-wrap">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Сурагч</th>
-            <th>Ирц</th>
-          </tr>
-        </thead>
-       
-        <tbody id="historyBody"></tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-</main>
-</div>
-</main>
-</div>
+<!-- FIREBASE -->
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+
 <script>
+
 const firebaseConfig = {
   apiKey: "AIzaSyDJvrEO4oMfEZVa81hW7ciC_KlaE0cl9aA",
   authDomain: "b-irts.firebaseapp.com",
@@ -197,306 +779,953 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const db = firebase.database();
-const studentsRef = db.ref("class11B/students");
-const attendanceRef = db.ref("class11B/attendance");
 
-const initialStudents = ["Анхбаяр", "Анужин", "Баасаннэмэх", "Ганбаатар", "Догсүнжав", "Дөлбадрах", "Мандуухай", "Мөнхсарнай", "Мөнх-Амьдрал", "Н Нандин-Эрдэнэ", "Ү Нандин-Эрдэнэ", "Б Нандин-Эрдэнэ", "Ууганцэцэг", "Сэрдамба", "Сүрэнхорлоо", "Очиржав", "Шинэбаяр", "Төрболд", "Төгөлдөр", "Пүрэвваанчиг", "Хан-Учрал", "Халиунаа", "Хатанзориг", "Хөгжилболд", "Хулан", "Чандмань-Эрдэнэ", "Чингүүн", "Цэлмүүн", "Энх-Уянга", "Энх-Орчлон", "Энхмэнд"];
+const db = firebase.database();
+
+const studentsRef =
+  db.ref("class11B/students");
+
+const attendanceRef =
+  db.ref("class11B/attendance");
+
+
+const initialStudents = [
+"Анхбаяр",
+"Анужин",
+"Баасаннэмэх",
+"Ганбаатар",
+"Догсүнжав",
+"Дөлбадрах",
+"Мандуухай",
+"Мөнхсарнай",
+"Мөнх-Амьдрал",
+"Н Нандин-Эрдэнэ",
+"Ү Нандин-Эрдэнэ",
+"Б Нандин-Эрдэнэ",
+"Ууганцэцэг",
+"Сэрдамба",
+"Сүрэнхорлоо",
+"Очиржав",
+"Шинэбаяр",
+"Төрболд",
+"Төгөлдөр",
+"Пүрэвваанчиг",
+"Хан-Учрал",
+"Халиунаа",
+"Хатанзориг",
+"Хөгжилболд",
+"Хулан",
+"Чандмань-Эрдэнэ",
+"Чингүүн",
+"Цэлмүүн",
+"Энх-Уянга",
+"Энх-Орчлон",
+"Энхмэнд"
+];
+
 const ADMIN_PASSWORD = "0020";
+
 let students = [];
 let attendance = {};
 let dataReady = false;
 
-function dateKey(){ return new Date().toISOString().slice(0,10); }
-function todayText(){ return new Date().toLocaleDateString("mn-MN",{year:"numeric",month:"long",day:"numeric",weekday:"long"}); }
-document.getElementById("today").textContent=todayText();
+
+/* ================= DATE ================= */
+
+function dateKey(){
+  return new Date().toISOString().slice(0,10);
+}
+
+function todayText(){
+
+  return new Date().toLocaleDateString(
+    "mn-MN",
+    {
+      year:"numeric",
+      month:"long",
+      day:"numeric",
+      weekday:"long"
+    }
+  );
+
+}
+
+document.getElementById("today").textContent =
+  todayText();
+
+
+/* ================= SIDEBAR ================= */
+
+function toggleSidebar(){
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const main =
+    document.querySelector(".main");
+
+  sidebar.classList.toggle("hidden");
+
+  main.classList.toggle("full");
+
+}
+
+
+/* ================= PAGE ================= */
 
 function showPage(p){
- document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
 
- document.getElementById(p).classList.add("active");
+  document
+    .querySelectorAll(".page")
+    .forEach(x =>
+      x.classList.remove("active")
+    );
 
- document.getElementById("homeNav").classList.toggle("active",p==="home");
- document.getElementById("historyNav").classList.toggle("active",p==="history");
- document.getElementById("adminNav").classList.toggle("active",p==="admin");
+  document
+    .getElementById(p)
+    .classList.add("active");
 
- if(p==="home"){
-   renderAttendance();
- }else if(p==="history"){
-   renderHistoryDates();
-   renderHistory();
- }else if(p==="admin"){
-   renderAdmin();
- }
+
+  document
+    .getElementById("homeNav")
+    .classList.toggle("active",p==="home");
+
+  document
+    .getElementById("historyNav")
+    .classList.toggle("active",p==="history");
+
+  document
+    .getElementById("adminNav")
+    .classList.toggle("active",p==="admin");
+
+
+  if(p==="home"){
+
+    renderAttendance();
+
+  }
+
+  else if(p==="history"){
+
+    renderHistoryDates();
+    renderHistory();
+
+  }
+
+  else if(p==="admin"){
+
+    renderAdmin();
+
+  }
+
 }
-function key(){return dateKey();}
-function getToday(){return attendance[key()]||{};}
+
+
+/* ================= ATTENDANCE ================= */
+
+function key(){
+  return dateKey();
+}
+
+function getToday(){
+  return attendance[key()] || {};
+}
+
 
 async function setStatus(name,status){
- if(!attendance[key()]) attendance[key()]={};
- attendance[key()][name]=status;
- try {
-   await attendanceRef.child(key()).child(name).set(status);
-   renderAttendance();
- } catch(e) {
-   alert("ирц бүртгэхэд алдаа гарлаа");
-   console.error(e);
- }
+
+  if(!attendance[key()])
+    attendance[key()] = {};
+
+  attendance[key()][name] = status;
+
+  try{
+
+    await attendanceRef
+      .child(key())
+      .child(name)
+      .set(status);
+
+    renderAttendance();
+
+  }
+
+  catch(e){
+
+    alert("Ирц бүртгэхэд алдаа гарлаа.");
+
+    console.error(e);
+
+  }
+
 }
+
 
 function renderAttendance(){
- const q=(document.getElementById("search").value||"").toLowerCase();
- const data=getToday();
- const body=document.getElementById("attendanceBody");
- const filtered=students.filter(s=>s.toLowerCase().includes(q));
- body.innerHTML=filtered.map((s,i)=>{
-   const st=data[s]||"Ирсэн";
-   return `<tr><td>${i+1}</td><td><b>${s}</b></td><td><div class="status">
-   ${["Ирсэн","Тасалсан","Чөлөөтэй"].map(x=>`<button data-s="${x}" class="${st===x?"active":""}" onclick="setStatus('${escapeJs(s)}','${x}')">${x}</button>`).join("")}
-   </div></td></tr>`;
- }).join("") || `<tr><td colspan="3" class="empty">Сурагч олдсонгүй.</td></tr>`;
- updateStats();
+
+  const search =
+    document.getElementById("search");
+
+  const q =
+    (search.value || "").toLowerCase();
+
+  const data = getToday();
+
+  const body =
+    document.getElementById("attendanceBody");
+
+
+  const filtered =
+    students.filter(
+      s =>
+      s.toLowerCase().includes(q)
+    );
+
+
+  body.innerHTML =
+
+    filtered.map((s,i)=>{
+
+      const st =
+        data[s] || "Ирсэн";
+
+
+      return `
+
+        <tr>
+
+          <td>${i+1}</td>
+
+          <td>
+            <b>${s}</b>
+          </td>
+
+          <td>
+
+            <div class="status">
+
+              ${
+
+                ["Ирсэн","Тасалсан","Чөлөөтэй"]
+
+                .map(x=>`
+
+                  <button
+
+                    data-s="${x}"
+
+                    class="${
+                      st===x
+                      ? "active"
+                      : ""
+                    }"
+
+                    onclick="setStatus(
+                      '${escapeJs(s)}',
+                      '${x}'
+                    )">
+
+                    ${x}
+
+                  </button>
+
+                `).join("")
+
+              }
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join("")
+
+    ||
+
+    `
+
+      <tr>
+
+        <td
+          colspan="3"
+          class="empty">
+
+          Сурагч олдсонгүй.
+
+        </td>
+
+      </tr>
+
+    `;
+
+
+  updateStats();
+
 }
+
+
 function updateStats(){
- const data=getToday();
- document.getElementById("total").textContent=students.length;
- document.getElementById("present").textContent=students.filter(s=>(data[s]||"Ирсэн")==="Ирсэн").length;
- document.getElementById("absent").textContent=students.filter(s=>data[s]==="Тасалсан").length;
- document.getElementById("free").textContent=students.filter(s=>data[s]==="Чөлөөтэй").length;
+
+  const data =
+    getToday();
+
+  document.getElementById("total")
+    .textContent =
+    students.length;
+
+  document.getElementById("present")
+    .textContent =
+    students.filter(
+      s =>
+      (data[s] || "Ирсэн")
+      === "Ирсэн"
+    ).length;
+
+  document.getElementById("absent")
+    .textContent =
+    students.filter(
+      s =>
+      data[s] === "Тасалсан"
+    ).length;
+
+  document.getElementById("free")
+    .textContent =
+    students.filter(
+      s =>
+      data[s] === "Чөлөөтэй"
+    ).length;
+
 }
-function escapeJs(s){return s.replace(/\\/g,"\\\\").replace(/'/g,"\\'");}
+
+
+function escapeJs(s){
+
+  return s
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'");
+
+}
+
+
+/* ================= ADMIN ================= */
 
 async function addStudent(){
- const input=document.getElementById("newStudent"), name=input.value.trim();
- if(!name)return alert("Сурагчийн нэр оруулна уу.");
- if(students.some(s=>s.toLowerCase()===name.toLowerCase())) return alert("Энэ нэр бүртгэлтэй байна.");
- try {
-   await studentsRef.set([...students,name]);
-   input.value="";
- } catch(e) {
-   alert("Сурагч нэмэхэд алдаа гарлаа. Firebase Rules-ээ шалгана уу.");
-   console.error(e);
- }
-}
-async function removeStudent(name){
- if(!confirm(name+"-ийг жагсаалтаас хасах уу?")) return;
- try {
-   await studentsRef.set(students.filter(s=>s!==name));
- } catch(e) {
-   alert("Сурагч хасахад алдаа гарлаа. Firebase Rules-ээ шалгана уу.");
-   console.error(e);
- }
-}
-function renderAdmin(){
- document.getElementById("adminCount").textContent="("+students.length+")";
- document.getElementById("adminList").innerHTML=students.map((s,i)=>`<div class="student-row"><span>${i+1}. <b>${s}</b></span><button class="delete" onclick="removeStudent('${escapeJs(s)}')">Хасах</button></div>`).join("");
-}
-function formatHistoryDate(date){
-  const d = new Date(date + "T00:00:00");
 
-  return d.toLocaleDateString("mn-MN",{
-    year:"numeric",
-    month:"long",
-    day:"numeric",
-    weekday:"long"
-  });
+  const input =
+    document.getElementById("newStudent");
+
+  const name =
+    input.value.trim();
+
+
+  if(!name){
+
+    alert("Сурагчийн нэр оруулна уу.");
+
+    return;
+
+  }
+
+
+  if(
+    students.some(
+      s =>
+      s.toLowerCase()
+      === name.toLowerCase()
+    )
+  ){
+
+    alert("Энэ нэр бүртгэлтэй байна.");
+
+    return;
+
+  }
+
+
+  try{
+
+    await studentsRef.set(
+      [...students,name]
+    );
+
+    input.value="";
+
+  }
+
+  catch(e){
+
+    alert(
+      "Сурагч нэмэхэд алдаа гарлаа. Firebase Rules-ээ шалгана уу."
+    );
+
+    console.error(e);
+
+  }
+
 }
+
+
+async function removeStudent(name){
+
+  if(
+    !confirm(
+      name +
+      "-ийг жагсаалтаас хасах уу?"
+    )
+  )
+    return;
+
+
+  try{
+
+    await studentsRef.set(
+      students.filter(
+        s => s !== name
+      )
+    );
+
+  }
+
+  catch(e){
+
+    alert(
+      "Сурагч хасахад алдаа гарлаа."
+    );
+
+    console.error(e);
+
+  }
+
+}
+
+
+function renderAdmin(){
+
+  document.getElementById("adminCount")
+    .textContent =
+    "(" + students.length + ")";
+
+
+  document.getElementById("adminList")
+    .innerHTML =
+
+    students.map((s,i)=>`
+
+      <div class="student-row">
+
+        <span>
+          ${i+1}. <b>${s}</b>
+        </span>
+
+        <button
+          class="delete"
+          onclick="removeStudent('${escapeJs(s)}')">
+
+          Хасах
+
+        </button>
+
+      </div>
+
+    `).join("");
+
+}
+
+
+function saveAttendance(){
+
+  alert(
+    "Ирц Firebase дээр автоматаар хадгалагддаг."
+  );
+
+}
+
+
+/* ================= ADMIN LOGIN ================= */
+
+function openAdmin(){
+
+  document
+    .getElementById("adminPassword")
+    .value="";
+
+  document
+    .getElementById("loginError")
+    .textContent="";
+
+  document
+    .getElementById("loginModal")
+    .classList.add("show");
+
+  setTimeout(
+    () =>
+      document
+        .getElementById("adminPassword")
+        .focus(),
+    100
+  );
+
+}
+
+
+function closeLogin(){
+
+  document
+    .getElementById("loginModal")
+    .classList.remove("show");
+
+}
+
+
+function checkAdmin(){
+
+  const p =
+    document
+      .getElementById("adminPassword")
+      .value;
+
+
+  if(p === ADMIN_PASSWORD){
+
+    closeLogin();
+
+    showPage("admin");
+
+  }
+
+  else{
+
+    document
+      .getElementById("loginError")
+      .textContent =
+      "Нууц үг буруу байна.";
+
+  }
+
+}
+
+
+/* ================= HISTORY ================= */
+
+function formatHistoryDate(date){
+
+  const d =
+    new Date(
+      date + "T00:00:00"
+    );
+
+
+  return d.toLocaleDateString(
+    "mn-MN",
+    {
+      year:"numeric",
+      month:"long",
+      day:"numeric",
+      weekday:"long"
+    }
+  );
+
+}
+
 
 function renderHistoryDates(){
-  const select = document.getElementById("historyDate");
-  const today = new Date();
 
-  const dates = Object.keys(attendance || {})
-    .filter(date => {
-      if(!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+  const select =
+    document.getElementById(
+      "historyDate"
+    );
 
-      const d = new Date(date + "T00:00:00");
-      const diff = Math.floor(
-        (today - d) / (1000 * 60 * 60 * 24)
-      );
+  const today =
+    new Date();
 
-      return diff >= 0 && diff <= 30;
+
+  const dates =
+
+    Object.keys(
+      attendance || {}
+    )
+
+    .filter(date=>{
+
+      if(
+        !/^\d{4}-\d{2}-\d{2}$/
+        .test(date)
+      )
+        return false;
+
+
+      const d =
+        new Date(
+          date + "T00:00:00"
+        );
+
+
+      const diff =
+        Math.floor(
+          (today-d) /
+          (1000*60*60*24)
+        );
+
+
+      return diff >= 0 &&
+             diff <= 30;
+
     })
+
     .sort()
     .reverse();
 
+
   if(!dates.length){
+
     select.innerHTML =
-      `<option value="">Сүүлийн 30 хоногт ирц алга</option>`;
+      `<option value="">
+        Сүүлийн 30 хоногт ирц алга
+      </option>`;
+
     return;
+
   }
 
-  const current = select.value;
 
-  select.innerHTML = dates.map(date =>
-    `<option value="${date}">
-      ${formatHistoryDate(date)}
-    </option>`
-  ).join("");
+  const current =
+    select.value;
 
-  if(dates.includes(current)){
-    select.value = current;
-  }else{
-    select.value = dates[0];
-  }
+
+  select.innerHTML =
+    dates.map(date=>`
+
+      <option value="${date}">
+        ${formatHistoryDate(date)}
+      </option>
+
+    `).join("");
+
+
+  if(dates.includes(current))
+    select.value=current;
+
+  else
+    select.value=dates[0];
+
 }
+
 
 function renderHistory(){
-  const select = document.getElementById("historyDate");
-  const date = select.value;
-  const body = document.getElementById("historyBody");
+
+  const select =
+    document.getElementById(
+      "historyDate"
+    );
+
+  const date =
+    select.value;
+
+  const body =
+    document.getElementById(
+      "historyBody"
+    );
+
 
   if(!date){
+
     body.innerHTML = `
+
       <tr>
-        <td colspan="3" class="empty">
-          Сүүлийн 30 хоногт ирц бүртгэгдээгүй байна.
+
+        <td
+          colspan="3"
+          class="empty">
+
+          Сүүлийн 30 хоногт
+          ирц бүртгэгдээгүй байна.
+
         </td>
+
       </tr>
+
     `;
 
-    document.getElementById("historyTotal").textContent = 0;
-    document.getElementById("historyPresent").textContent = 0;
-    document.getElementById("historyAbsent").textContent = 0;
-    document.getElementById("historyFree").textContent = 0;
+
+    document.getElementById(
+      "historyTotal"
+    ).textContent=0;
+
+    document.getElementById(
+      "historyPresent"
+    ).textContent=0;
+
+    document.getElementById(
+      "historyAbsent"
+    ).textContent=0;
+
+    document.getElementById(
+      "historyFree"
+    ).textContent=0;
 
     return;
+
   }
 
-  const data = attendance[date] || {};
 
-  document.getElementById("historyTitle").textContent =
-    formatHistoryDate(date) + " — Ирц";
+  const data =
+    attendance[date] || {};
 
-  let present = 0;
-  let absent = 0;
-  let free = 0;
 
-  body.innerHTML = students.map((s,i)=>{
+  document.getElementById(
+    "historyTitle"
+  ).textContent =
+    formatHistoryDate(date)
+    + " — Ирц";
 
-    const status = data[s] || "Ирсэн";
 
-    if(status === "Ирсэн") present++;
-    if(status === "Тасалсан") absent++;
-    if(status === "Чөлөөтэй") free++;
+  let present=0;
+  let absent=0;
+  let free=0;
 
-    return `
-      <tr>
-        <td>${i+1}</td>
-        <td><b>${s}</b></td>
-        <td>
-          <div class="status">
-            <button data-s="Ирсэн"
-              class="${status==="Ирсэн"?"active":""}">
-              Ирсэн
-            </button>
 
-            <button data-s="Тасалсан"
-              class="${status==="Тасалсан"?"active":""}">
-              Тасалсан
-            </button>
+  body.innerHTML =
 
-            <button data-s="Чөлөөтэй"
-              class="${status==="Чөлөөтэй"?"active":""}">
-              Чөлөөтэй
-            </button>
-          </div>
-        </td>
-      </tr>
-    `;
-  }).join("");
+    students.map((s,i)=>{
 
-  document.getElementById("historyTotal").textContent = students.length;
-  document.getElementById("historyPresent").textContent = present;
-  document.getElementById("historyAbsent").textContent = absent;
-  document.getElementById("historyFree").textContent = free;
+      const status =
+        data[s] || "Ирсэн";
+
+
+      if(status==="Ирсэн")
+        present++;
+
+      if(status==="Тасалсан")
+        absent++;
+
+      if(status==="Чөлөөтэй")
+        free++;
+
+
+      return `
+
+        <tr>
+
+          <td>${i+1}</td>
+
+          <td>
+            <b>${s}</b>
+          </td>
+
+          <td>
+
+            <div class="status">
+
+              <button
+                data-s="Ирсэн"
+                class="${
+                  status==="Ирсэн"
+                  ?"active":""
+                }">
+                Ирсэн
+              </button>
+
+              <button
+                data-s="Тасалсан"
+                class="${
+                  status==="Тасалсан"
+                  ?"active":""
+                }">
+                Тасалсан
+              </button>
+
+              <button
+                data-s="Чөлөөтэй"
+                class="${
+                  status==="Чөлөөтэй"
+                  ?"active":""
+                }">
+                Чөлөөтэй
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join("");
+
+
+  document.getElementById(
+    "historyTotal"
+  ).textContent =
+    students.length;
+
+  document.getElementById(
+    "historyPresent"
+  ).textContent =
+    present;
+
+  document.getElementById(
+    "historyAbsent"
+  ).textContent =
+    absent;
+
+  document.getElementById(
+    "historyFree"
+  ).textContent =
+    free;
+
 }
-function saveAttendance(){ alert("Ирц Firebase дээр автоматаар хадгалагддаг."); }
 
-function openAdmin(){
- document.getElementById("adminPassword").value="";
- document.getElementById("loginError").textContent="";
- document.getElementById("loginModal").classList.add("show");
- setTimeout(()=>document.getElementById("adminPassword").focus(),100);
-}
-function closeLogin(){document.getElementById("loginModal").classList.remove("show");}
-function checkAdmin(){
- const p=document.getElementById("adminPassword").value;
- if(p===ADMIN_PASSWORD){closeLogin();showPage("admin");}
- else document.getElementById("loginError").textContent="Нууц үг буруу байна.";
-}
 
-studentsRef.on("value", snap=>{
- const val=snap.val();
- if(Array.isArray(val) && val.length){
-   students=val;
- } else if(!val){
-   students=[...initialStudents];
-   studentsRef.set(students);
- } else {
-   students=Object.values(val);
- }
- dataReady=true;
- renderAttendance();
- renderAdmin();
-}, err=>{
- console.error(err);
- alert("Firebase database-тэй холбогдож чадсангүй. Firebase Rules болон database URL-ээ шалгана уу.");
-});
+/* ================= PNG ================= */
 
-attendanceRef.on("value", snap=>{
-  attendance=snap.val() || {};
+async function downloadAttendanceImage(){
 
-  renderAttendance();
+  const home =
+    document.getElementById("home");
 
-  if(document.getElementById("history").classList.contains("active")){
-    renderHistoryDates();
-    renderHistory();
+
+  try{
+
+    const canvas =
+      await html2canvas(
+        home,
+        {
+          backgroundColor:"#080a0f",
+          scale:2,
+          useCORS:true
+        }
+      );
+
+
+    const link =
+      document.createElement("a");
+
+
+    link.download =
+      "11B-irts-" +
+      dateKey() +
+      ".png";
+
+
+    link.href =
+      canvas.toDataURL(
+        "image/png"
+      );
+
+
+    link.click();
+
   }
-});
+
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "Зураг үүсгэхэд алдаа гарлаа."
+    );
+
+  }
+
+}
+
+
+/* ================= FIREBASE ================= */
+
+studentsRef.on(
+  "value",
+  snap=>{
+
+    const val =
+      snap.val();
+
+
+    if(
+      Array.isArray(val) &&
+      val.length
+    ){
+
+      students=val;
+
+    }
+
+    else if(!val){
+
+      students =
+        [...initialStudents];
+
+      studentsRef.set(
+        students
+      );
+
+    }
+
+    else{
+
+      students =
+        Object.values(val);
+
+    }
+
+
+    dataReady=true;
+
+    renderAttendance();
+
+    renderAdmin();
+
+  },
+
+  err=>{
+
+    console.error(err);
+
+    alert(
+      "Firebase database-тэй холбогдож чадсангүй. Firebase Rules болон database URL-ээ шалгана уу."
+    );
+
+  }
+
+);
+
+
+attendanceRef.on(
+  "value",
+  snap=>{
+
+    attendance =
+      snap.val() || {};
+
+
+    renderAttendance();
+
+
+    if(
+      document
+        .getElementById("history")
+        .classList
+        .contains("active")
+    ){
+
+      renderHistoryDates();
+
+      renderHistory();
+
+    }
+
+  }
+
+);
+
 
 renderAttendance();
 renderAdmin();
-  
-  async function downloadAttendanceImage(){
-  const home = document.getElementById("home");
 
-  try {
-    const canvas = await html2canvas(home, {
-      backgroundColor: "#080a0f",
-      scale: 2,
-      useCORS: true
-    });
-
-    const link = document.createElement("a");
-    link.download = "11B-irts-" + dateKey() + ".png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-
-  } catch(error) {
-    console.error(error);
-    alert("Зураг үүсгэхэд алдаа гарлаа.");
-  }
-}
-function toggleSidebar(){
-  const sidebar = document.querySelector(".sidebar");
-  const main = document.querySelector(".main");
-
-  sidebar.classList.toggle("hidden");
-  main.classList.toggle("full");
-} 
 </script>
 
-<div id="loginModal" class="modal">
-  <div class="login-box">
-    <div class="login-icon">🔐</div>
-    <h2>Admin нэвтрэх</h2>
-    <p>Admin хэсэгт орохын тулд нууц үгээ оруулна уу.</p>
-    <input id="adminPassword" type="password" placeholder="Нууц үг" onkeydown="if(event.key==='Enter')checkAdmin()">
-    <button class="primary login-btn" onclick="checkAdmin()">Нэвтрэх</button>
-    <button class="cancel-btn" onclick="closeLogin()">Буцах</button>
-    <div id="loginError"></div>
-  </div>
-</div>
 </body>
 </html>
