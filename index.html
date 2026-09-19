@@ -27,9 +27,19 @@
 <aside class="sidebar">
   <div class="logo">11<span>Б</span><small>ИРЦИЙН СИСТЕМ</small></div>
   <div class="nav">
-    <button id="homeNav" class="active" onclick="showPage('home')">🏠 &nbsp; Home</button>
-    <button id="adminNav" onclick="openAdmin()">🦹🏻‍♂️ &nbsp; Admin</button>
-  </div>
+  <div class="nav">
+  <button id="homeNav" class="active" onclick="showPage('home')">
+    🏠 &nbsp; Home
+  </button>
+
+  <button id="historyNav" onclick="showPage('history')">
+    📅 &nbsp; Өмнөх ирц
+  </button>
+
+  <button id="adminNav" onclick="openAdmin()">
+    🦹🏻‍♂️ &nbsp; Admin
+  </button>
+</div>
 </aside>
 
 <main class="main">
@@ -60,6 +70,64 @@
   </div>
   <div class="panel"><div class="panel-head"><h2>Сурагчдын жагсаалт <span id="adminCount"></span></h2></div><div class="admin-list" id="adminList"></div></div>
 </section>
+  
+<section id="history" class="page">
+  <div class="top">
+    <div class="title">
+      <h1>Өмнөх ирц</h1>
+      <p>Сүүлийн 30 хоногийн ирцийг харах.</p>
+    </div>
+
+    <div class="tools">
+      <select id="historyDate" onchange="renderHistory()"></select>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="label">Нийт сурагч</div>
+      <div class="num blue" id="historyTotal">0</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Ирсэн</div>
+      <div class="num green" id="historyPresent">0</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Тасалсан</div>
+      <div class="num red" id="historyAbsent">0</div>
+    </div>
+
+    <div class="card">
+      <div class="label">Чөлөөтэй</div>
+      <div class="num yellow" id="historyFree">0</div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2 id="historyTitle">Өмнөх өдрийн ирц</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Сурагч</th>
+            <th>Ирц</th>
+          </tr>
+        </thead>
+
+        <tbody id="historyBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+</div>
 </main>
 </div>
 
@@ -94,10 +162,21 @@ document.getElementById("today").textContent=todayText();
 
 function showPage(p){
  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));
+
  document.getElementById(p).classList.add("active");
+
  document.getElementById("homeNav").classList.toggle("active",p==="home");
+ document.getElementById("historyNav").classList.toggle("active",p==="history");
  document.getElementById("adminNav").classList.toggle("active",p==="admin");
- if(p==="home") renderAttendance(); else renderAdmin();
+
+ if(p==="home"){
+   renderAttendance();
+ }else if(p==="history"){
+   renderHistoryDates();
+   renderHistory();
+ }else if(p==="admin"){
+   renderAdmin();
+ }
 }
 function key(){return dateKey();}
 function getToday(){return attendance[key()]||{};}
@@ -161,6 +240,126 @@ function renderAdmin(){
  document.getElementById("adminCount").textContent="("+students.length+")";
  document.getElementById("adminList").innerHTML=students.map((s,i)=>`<div class="student-row"><span>${i+1}. <b>${s}</b></span><button class="delete" onclick="removeStudent('${escapeJs(s)}')">Хасах</button></div>`).join("");
 }
+function formatHistoryDate(date){
+  const d = new Date(date + "T00:00:00");
+
+  return d.toLocaleDateString("mn-MN",{
+    year:"numeric",
+    month:"long",
+    day:"numeric",
+    weekday:"long"
+  });
+}
+
+function renderHistoryDates(){
+  const select = document.getElementById("historyDate");
+  const today = new Date();
+
+  const dates = Object.keys(attendance || {})
+    .filter(date => {
+      if(!/^\d{4}-\d{2}-\d{2}$/.test(date)) return false;
+
+      const d = new Date(date + "T00:00:00");
+      const diff = Math.floor(
+        (today - d) / (1000 * 60 * 60 * 24)
+      );
+
+      return diff >= 0 && diff <= 30;
+    })
+    .sort()
+    .reverse();
+
+  if(!dates.length){
+    select.innerHTML =
+      `<option value="">Сүүлийн 30 хоногт ирц алга</option>`;
+    return;
+  }
+
+  const current = select.value;
+
+  select.innerHTML = dates.map(date =>
+    `<option value="${date}">
+      ${formatHistoryDate(date)}
+    </option>`
+  ).join("");
+
+  if(dates.includes(current)){
+    select.value = current;
+  }else{
+    select.value = dates[0];
+  }
+}
+
+function renderHistory(){
+  const select = document.getElementById("historyDate");
+  const date = select.value;
+  const body = document.getElementById("historyBody");
+
+  if(!date){
+    body.innerHTML = `
+      <tr>
+        <td colspan="3" class="empty">
+          Сүүлийн 30 хоногт ирц бүртгэгдээгүй байна.
+        </td>
+      </tr>
+    `;
+
+    document.getElementById("historyTotal").textContent = 0;
+    document.getElementById("historyPresent").textContent = 0;
+    document.getElementById("historyAbsent").textContent = 0;
+    document.getElementById("historyFree").textContent = 0;
+
+    return;
+  }
+
+  const data = attendance[date] || {};
+
+  document.getElementById("historyTitle").textContent =
+    formatHistoryDate(date) + " — Ирц";
+
+  let present = 0;
+  let absent = 0;
+  let free = 0;
+
+  body.innerHTML = students.map((s,i)=>{
+
+    const status = data[s] || "Ирсэн";
+
+    if(status === "Ирсэн") present++;
+    if(status === "Тасалсан") absent++;
+    if(status === "Чөлөөтэй") free++;
+
+    return `
+      <tr>
+        <td>${i+1}</td>
+        <td><b>${s}</b></td>
+        <td>
+          <div class="status">
+            <button data-s="Ирсэн"
+              class="${status==="Ирсэн"?"active":""}">
+              Ирсэн
+            </button>
+
+            <button data-s="Тасалсан"
+              class="${status==="Тасалсан"?"active":""}">
+              Тасалсан
+            </button>
+
+            <button data-s="Чөлөөтэй"
+              class="${status==="Чөлөөтэй"?"active":""}">
+              Чөлөөтэй
+            </button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join("");
+
+  document.getElementById("historyTotal").textContent = students.length;
+  document.getElementById("historyPresent").textContent = present;
+  document.getElementById("historyAbsent").textContent = absent;
+  document.getElementById("historyFree").textContent = free;
+}
 function saveAttendance(){ alert("Ирц Firebase дээр автоматаар хадгалагддаг."); }
 
 function openAdmin(){
@@ -195,8 +394,14 @@ studentsRef.on("value", snap=>{
 });
 
 attendanceRef.on("value", snap=>{
- attendance=snap.val() || {};
- renderAttendance();
+  attendance=snap.val() || {};
+
+  renderAttendance();
+
+  if(document.getElementById("history").classList.contains("active")){
+    renderHistoryDates();
+    renderHistory();
+  }
 });
 
 renderAttendance();
