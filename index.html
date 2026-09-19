@@ -28,7 +28,7 @@
   <div class="logo">11<span>Б</span><small>ИРЦИЙН СИСТЕМ</small></div>
   <div class="nav">
     <button id="homeNav" class="active" onclick="showPage('home')">🏠 &nbsp; Home</button>
-    <button id="adminNav" onclick="openAdmin()">⚙️ &nbsp; Admin</button>
+    <button id="adminNav" onclick="openAdmin()">🦹🏻‍♂️ &nbsp; Admin</button>
   </div>
 </aside>
 
@@ -109,8 +109,8 @@ async function setStatus(name,status){
    await attendanceRef.child(key()).child(name).set(status);
    renderAttendance();
  } catch(e) {
-   alert("Ирц хадгалахад алдаа гарлаа. Firebase Rules-ээ шалгана уу.");
-   console.error(e);
+   alert("Firebase алдаа:n"+e.message);
+   console.error("Firebase error", e);
  }
 }
 
