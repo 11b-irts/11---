@@ -12,6 +12,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
 <style>
+
 :root{
   --bg:#080a0f;
   --card:#10141d;
@@ -20,7 +21,7 @@
   --muted:#8f98aa;
   --accent:#7c5cff;
   --green:#20c997;
-  --red:#ff5c5c;
+  --red:#ff5252;
   --yellow:#ffc857;
   --border:#252a36;
 }
@@ -42,18 +43,24 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= SIDEBAR ================= */
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
 
 .sidebar{
   width:245px;
-  background:rgba(12,14,20,.97);
+  background:rgba(12,14,20,.98);
   border-right:1px solid var(--border);
   padding:24px 16px;
+
   position:fixed;
   top:0;
   left:0;
+
   height:100vh;
   z-index:999;
+
   transition:transform .25s ease;
 }
 
@@ -63,6 +70,7 @@ body{
 
 .nav{
   margin-top:65px;
+
   display:flex;
   flex-direction:column;
   gap:10px;
@@ -70,15 +78,19 @@ body{
 
 .nav button{
   width:100%;
+
   padding:14px 15px;
+
   border:1px solid transparent;
   border-radius:12px;
+
   background:transparent;
   color:#dce1ec;
+
   text-align:left;
   font-size:15px;
+
   cursor:pointer;
-  transition:.2s;
 }
 
 .nav button:hover{
@@ -91,20 +103,30 @@ body{
   color:#fff;
 }
 
-/* ================= MENU BUTTON ================= */
+
+/* =====================================================
+   MENU
+===================================================== */
 
 .menu-btn{
   position:fixed;
+
   top:18px;
   left:18px;
+
   z-index:2000;
+
   width:45px;
   height:45px;
+
   border:1px solid #303746;
   border-radius:12px;
+
   background:#10141d;
   color:#fff;
+
   font-size:22px;
+
   cursor:pointer;
 }
 
@@ -112,24 +134,36 @@ body{
   background:#181e2a;
 }
 
-/* ================= MAIN ================= */
+
+/* =====================================================
+   MAIN
+===================================================== */
 
 .main{
   margin-left:245px;
+
   width:calc(100% - 245px);
+
   min-height:100vh;
+
   padding:30px;
-  max-width:1400px;
-  transition:margin-left .25s ease,width .25s ease;
+
+  max-width:none;
+
+  transition:
+    margin-left .25s ease,
+    width .25s ease;
 }
 
 .main.full{
   margin-left:0;
   width:100%;
-  max-width:none;
 }
 
-/* ================= PAGE ================= */
+
+/* =====================================================
+   PAGE
+===================================================== */
 
 .page{
   display:none;
@@ -139,7 +173,10 @@ body{
   display:block;
 }
 
-/* ================= HEADER ================= */
+
+/* =====================================================
+   HEADER
+===================================================== */
 
 .header{
   margin:40px auto 25px;
@@ -156,21 +193,36 @@ body{
   color:var(--muted);
 }
 
-/* ================= STATS ================= */
+
+/* =====================================================
+   STATS
+===================================================== */
 
 .stats{
   max-width:1200px;
+
   margin:0 auto 20px;
+
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(4,1fr);
+
   gap:14px;
 }
 
 .stat{
   background:var(--card);
+
   border:1px solid var(--border);
+
   border-radius:16px;
+
   padding:18px;
+
+  position:relative;
+
+  overflow:hidden;
 }
 
 .stat .label{
@@ -184,24 +236,69 @@ body{
   font-weight:700;
 }
 
-/* ================= CARD ================= */
+
+/* ДЭЭД ТАЛЫН ӨНГӨ */
+
+.stat.total{
+  border-top:3px solid #7c5cff;
+}
+
+.stat.present{
+  border-top:3px solid var(--green);
+}
+
+.stat.absent{
+  border-top:3px solid var(--red);
+}
+
+.stat.free{
+  border-top:3px solid var(--yellow);
+}
+
+.stat.present .number{
+  color:var(--green);
+}
+
+.stat.absent .number{
+  color:var(--red);
+}
+
+.stat.free .number{
+  color:var(--yellow);
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
 
 .card{
   max-width:1200px;
+
   margin:0 auto 20px;
+
   background:var(--card);
+
   border:1px solid var(--border);
+
   border-radius:18px;
+
   overflow:hidden;
 }
 
 .card-head{
   padding:18px;
+
   border-bottom:1px solid var(--border);
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:15px;
+
   flex-wrap:wrap;
 }
 
@@ -219,10 +316,15 @@ body{
 input,
 select{
   background:#0c1018;
+
   border:1px solid #303746;
+
   color:#fff;
+
   border-radius:10px;
+
   padding:11px 13px;
+
   outline:none;
 }
 
@@ -231,7 +333,10 @@ select:focus{
   border-color:var(--accent);
 }
 
-/* ================= BUTTON ================= */
+
+/* =====================================================
+   BUTTON
+===================================================== */
 
 button{
   font-family:inherit;
@@ -239,11 +344,17 @@ button{
 
 .primary{
   border:0;
+
   background:var(--accent);
+
   color:white;
+
   border-radius:10px;
+
   padding:11px 15px;
+
   cursor:pointer;
+
   font-weight:600;
 }
 
@@ -251,7 +362,10 @@ button{
   opacity:.9;
 }
 
-/* ================= TABLE ================= */
+
+/* =====================================================
+   TABLE
+===================================================== */
 
 .table-wrap{
   width:100%;
@@ -260,20 +374,26 @@ button{
 
 table{
   width:100%;
+
   border-collapse:collapse;
+
   min-width:650px;
 }
 
 th,
 td{
   padding:14px 16px;
+
   border-bottom:1px solid #202531;
+
   text-align:left;
 }
 
 th{
   color:var(--muted);
+
   font-size:13px;
+
   font-weight:600;
 }
 
@@ -281,48 +401,130 @@ td{
   font-size:14px;
 }
 
+
+/* =====================================================
+   STATUS BUTTONS
+===================================================== */
+
 .status{
   display:flex;
+
   gap:7px;
+
   flex-wrap:wrap;
 }
 
 .status button{
   border:1px solid #303746;
+
   background:#111620;
+
   color:#aeb6c6;
-  padding:7px 10px;
+
+  padding:7px 11px;
+
   border-radius:8px;
+
   cursor:pointer;
+
   font-size:12px;
+
+  transition:.15s;
 }
 
-.status button.active{
-  background:#252c3b;
-  border-color:#56617a;
-  color:#fff;
+
+/* ИРСЭН */
+
+.status button.status-present{
+  color:var(--green);
+  border-color:#1d755c;
+  background:#10261f;
 }
+
+.status button.status-present.active{
+  background:var(--green);
+  border-color:var(--green);
+  color:#06130f;
+  font-weight:700;
+}
+
+
+/* ТАСАЛСАН */
+
+.status button.status-absent{
+  color:var(--red);
+  border-color:#75323a;
+  background:#291317;
+}
+
+.status button.status-absent.active{
+  background:var(--red);
+  border-color:var(--red);
+  color:#180507;
+  font-weight:700;
+}
+
+
+/* ЧӨЛӨӨТЭЙ */
+
+.status button.status-free{
+  color:var(--yellow);
+  border-color:#80672c;
+  background:#29230f;
+}
+
+.status button.status-free.active{
+  background:var(--yellow);
+  border-color:var(--yellow);
+  color:#171100;
+  font-weight:700;
+}
+
+
+/* HISTORY BUTTONS DISABLED */
+
+.status button:disabled{
+  cursor:default;
+  opacity:.9;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
 
 .empty{
   text-align:center;
+
   color:var(--muted);
+
   padding:35px;
 }
 
-/* ================= ADMIN ================= */
+
+/* =====================================================
+   ADMIN
+===================================================== */
 
 .admin-box{
   max-width:1200px;
+
   margin:0 auto;
+
   background:var(--card);
+
   border:1px solid var(--border);
+
   border-radius:18px;
+
   padding:20px;
 }
 
 .add-box{
   display:flex;
+
   gap:10px;
+
   margin-bottom:20px;
 }
 
@@ -332,32 +534,52 @@ td{
 
 .student-row{
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
   gap:15px;
+
   padding:13px 0;
+
   border-bottom:1px solid #202531;
 }
 
 .delete{
   border:1px solid #572f36;
+
   background:#28161a;
+
   color:#ff8b96;
+
   padding:7px 11px;
+
   border-radius:8px;
+
   cursor:pointer;
 }
 
-/* ================= MODAL ================= */
+
+/* =====================================================
+   MODAL
+===================================================== */
 
 .modal{
   position:fixed;
+
   inset:0;
+
   background:rgba(0,0,0,.7);
+
   display:none;
+
   align-items:center;
+
   justify-content:center;
+
   z-index:3000;
+
   padding:20px;
 }
 
@@ -368,9 +590,13 @@ td{
 .modal-box{
   width:100%;
   max-width:380px;
+
   background:#10141d;
+
   border:1px solid #303746;
+
   border-radius:18px;
+
   padding:24px;
 }
 
@@ -380,11 +606,13 @@ td{
 
 .modal-box input{
   width:100%;
+
   margin:12px 0;
 }
 
 .modal-actions{
   display:flex;
+
   gap:10px;
 }
 
@@ -394,20 +622,30 @@ td{
 
 .cancel{
   border:1px solid #303746;
+
   background:#151a25;
+
   color:#fff;
+
   border-radius:10px;
+
   padding:11px;
+
   cursor:pointer;
 }
 
 .error{
   color:#ff6975;
+
   font-size:13px;
+
   min-height:18px;
 }
 
-/* ================= MOBILE ================= */
+
+/* =====================================================
+   MOBILE
+===================================================== */
 
 @media(max-width:700px){
 
@@ -454,115 +692,248 @@ td{
   }
 
 }
+
+
+/* =====================================================
+   EXPORT IMAGE
+===================================================== */
+
+.export-title{
+  color:#fff;
+}
+
 </style>
 </head>
 
+
 <body>
 
-<!-- MENU -->
-<button class="menu-btn" onclick="toggleSidebar()">☰</button>
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<button
+  class="menu-btn"
+  onclick="toggleSidebar()">
+
+  ☰
+
+</button>
+
 
 <div class="app">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar hidden" id="sidebar">
+
+  <!-- ===================================================
+       SIDEBAR
+  =================================================== -->
+
+  <aside
+    class="sidebar hidden"
+    id="sidebar">
 
     <div class="nav">
 
-      <button id="homeNav"
-              class="active"
-              onclick="showPage('home')">
+      <button
+        id="homeNav"
+        class="active"
+        onclick="showPage('home')">
+
         🏠 &nbsp; Home
+
       </button>
 
-      <button id="historyNav"
-              onclick="showPage('history')">
+
+      <button
+        id="historyNav"
+        onclick="showPage('history')">
+
         📅 &nbsp; Өмнөх ирц
+
       </button>
 
-      <button id="adminNav"
-              onclick="openAdmin()">
+
+      <button
+        id="adminNav"
+        onclick="openAdmin()">
+
         🦹🏻‍♂️ &nbsp; Admin
+
       </button>
 
     </div>
 
   </aside>
 
-  <!-- MAIN -->
+
+  <!-- ===================================================
+       MAIN
+  =================================================== -->
+
   <main class="main full">
 
-    <!-- ================= HOME ================= -->
 
-    <section id="home" class="page active">
+    <!-- =================================================
+         HOME
+    ================================================= -->
+
+    <section
+      id="home"
+      class="page active">
+
 
       <div class="header">
-        <h1>11Б ирцийн мэдээлэл</h1>
+
+        <h1>
+          11Б ирцийн мэдээлэл
+        </h1>
+
         <p id="today"></p>
+
       </div>
+
+
+      <!-- STATS -->
 
       <div class="stats">
 
-        <div class="stat">
-          <div class="label">Нийт сурагч</div>
-          <div class="number" id="total">0</div>
+
+        <div class="stat total">
+
+          <div class="label">
+            Нийт сурагч
+          </div>
+
+          <div
+            class="number"
+            id="total">
+
+            0
+
+          </div>
+
         </div>
 
-        <div class="stat">
-          <div class="label">Ирсэн</div>
-          <div class="number" id="present">0</div>
+
+        <div class="stat present">
+
+          <div class="label">
+            Ирсэн
+          </div>
+
+          <div
+            class="number"
+            id="present">
+
+            0
+
+          </div>
+
         </div>
 
-        <div class="stat">
-          <div class="label">Тасалсан</div>
-          <div class="number" id="absent">0</div>
+
+        <div class="stat absent">
+
+          <div class="label">
+            Тасалсан
+          </div>
+
+          <div
+            class="number"
+            id="absent">
+
+            0
+
+          </div>
+
         </div>
 
-        <div class="stat">
-          <div class="label">Чөлөөтэй</div>
-          <div class="number" id="free">0</div>
+
+        <div class="stat free">
+
+          <div class="label">
+            Чөлөөтэй
+          </div>
+
+          <div
+            class="number"
+            id="free">
+
+            0
+
+          </div>
+
         </div>
+
 
       </div>
 
+
+      <!-- ATTENDANCE -->
+
       <div class="card">
+
 
         <div class="card-head">
 
-          <h2>Өнөөдрийн ирц</h2>
+          <h2>
+            Өнөөдрийн ирц
+          </h2>
+
 
           <div class="controls">
+
 
             <input
               id="search"
               type="text"
               placeholder="Сурагч хайх..."
-              oninput="renderAttendance()"
-            >
+              oninput="renderAttendance()">
+
 
             <button
               class="primary"
               onclick="downloadAttendanceImage()">
+
               📸 Зураг татах
+
             </button>
+
 
           </div>
 
         </div>
+
 
         <div class="table-wrap">
 
           <table>
 
             <thead>
+
               <tr>
-                <th>#</th>
-                <th>Сурагч</th>
-                <th>Ирц</th>
+
+                <th>
+                  #
+                </th>
+
+                <th>
+                  Сурагч
+                </th>
+
+                <th>
+                  Ирц
+                </th>
+
               </tr>
+
             </thead>
 
-            <tbody id="attendanceBody"></tbody>
+
+            <tbody
+              id="attendanceBody">
+            </tbody>
 
           </table>
 
@@ -573,13 +944,21 @@ td{
     </section>
 
 
-    <!-- ================= HISTORY ================= -->
 
-    <section id="history" class="page">
+    <!-- =================================================
+         HISTORY
+    ================================================= -->
+
+    <section
+      id="history"
+      class="page">
+
 
       <div class="header">
 
-        <h1>Өмнөх ирц</h1>
+        <h1>
+          Өмнөх ирц
+        </h1>
 
         <p id="historyTitle">
           Өмнөх өдрийн ирц
@@ -587,56 +966,128 @@ td{
 
       </div>
 
+
       <div class="stats">
 
-        <div class="stat">
-          <div class="label">Нийт сурагч</div>
-          <div class="number" id="historyTotal">0</div>
+
+        <div class="stat total">
+
+          <div class="label">
+            Нийт сурагч
+          </div>
+
+          <div
+            class="number"
+            id="historyTotal">
+
+            0
+
+          </div>
+
         </div>
 
-        <div class="stat">
-          <div class="label">Ирсэн</div>
-          <div class="number" id="historyPresent">0</div>
+
+        <div class="stat present">
+
+          <div class="label">
+            Ирсэн
+          </div>
+
+          <div
+            class="number"
+            id="historyPresent">
+
+            0
+
+          </div>
+
         </div>
 
-        <div class="stat">
-          <div class="label">Тасалсан</div>
-          <div class="number" id="historyAbsent">0</div>
+
+        <div class="stat absent">
+
+          <div class="label">
+            Тасалсан
+          </div>
+
+          <div
+            class="number"
+            id="historyAbsent">
+
+            0
+
+          </div>
+
         </div>
 
-        <div class="stat">
-          <div class="label">Чөлөөтэй</div>
-          <div class="number" id="historyFree">0</div>
+
+        <div class="stat free">
+
+          <div class="label">
+            Чөлөөтэй
+          </div>
+
+          <div
+            class="number"
+            id="historyFree">
+
+            0
+
+          </div>
+
         </div>
+
 
       </div>
 
+
       <div class="card">
+
 
         <div class="card-head">
 
-          <h2>Ирц сонгох</h2>
+          <h2>
+            Ирц сонгох
+          </h2>
+
 
           <select
             id="historyDate"
             onchange="renderHistory()">
+
           </select>
 
         </div>
+
 
         <div class="table-wrap">
 
           <table>
 
             <thead>
+
               <tr>
-                <th>#</th>
-                <th>Сурагч</th>
-                <th>Ирц</th>
+
+                <th>
+                  #
+                </th>
+
+                <th>
+                  Сурагч
+                </th>
+
+                <th>
+                  Ирц
+                </th>
+
               </tr>
+
             </thead>
 
-            <tbody id="historyBody"></tbody>
+
+            <tbody
+              id="historyBody">
+            </tbody>
 
           </table>
 
@@ -647,19 +1098,31 @@ td{
     </section>
 
 
-    <!-- ================= ADMIN ================= -->
 
-    <section id="admin" class="page">
+    <!-- =================================================
+         ADMIN
+    ================================================= -->
+
+    <section
+      id="admin"
+      class="page">
+
 
       <div class="header">
 
-        <h1>Admin</h1>
+        <h1>
+          Admin
+        </h1>
 
-        <p>Сурагчдын жагсаалтыг удирдах</p>
+        <p>
+          Сурагчдын жагсаалтыг удирдах
+        </p>
 
       </div>
 
+
       <div class="admin-box">
+
 
         <div class="add-box">
 
@@ -668,18 +1131,28 @@ td{
             type="text"
             placeholder="Шинэ сурагчийн нэр">
 
+
           <button
             class="primary"
             onclick="addStudent()">
+
             + Нэмэх
+
           </button>
 
         </div>
 
+
         <h3>
+
           Сурагчид
-          <span id="adminCount">(0)</span>
+
+          <span id="adminCount">
+            (0)
+          </span>
+
         </h3>
+
 
         <div id="adminList"></div>
 
@@ -687,22 +1160,34 @@ td{
 
     </section>
 
+
   </main>
 
 </div>
 
 
-<!-- ================= LOGIN MODAL ================= -->
 
-<div class="modal" id="loginModal">
+<!-- =====================================================
+     LOGIN MODAL
+===================================================== -->
+
+<div
+  class="modal"
+  id="loginModal">
+
 
   <div class="modal-box">
 
-    <h2>🔐 Admin нэвтрэх</h2>
+
+    <h2>
+      🔐 Admin нэвтрэх
+    </h2>
+
 
     <p style="color:#8f98aa;">
       Admin нууц үгээ оруулна уу.
     </p>
+
 
     <input
       id="adminPassword"
@@ -710,30 +1195,40 @@ td{
       placeholder="Нууц үг"
       onkeydown="if(event.key==='Enter') checkAdmin()">
 
+
     <div
       id="loginError"
       class="error">
     </div>
 
+
     <div class="modal-actions">
+
 
       <button
         class="cancel"
         onclick="closeLogin()">
+
         Болих
+
       </button>
+
 
       <button
         class="primary"
         onclick="checkAdmin()">
+
         Нэвтрэх
+
       </button>
+
 
     </div>
 
   </div>
 
 </div>
+
 
 
 <script>
@@ -743,22 +1238,44 @@ td{
 ===================================================== */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDJvrEO4oMfEZVa81hW7ciC_KlaE0cl9aA",
-  authDomain: "b-irts.firebaseapp.com",
-  databaseURL: "https://b-irts-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "b-irts",
-  storageBucket: "b-irts.firebasestorage.app",
-  messagingSenderId: "812154469314",
-  appId: "1:812154469314:web:9cb88abcdf1afc74a9b45b",
-  measurementId: "G-KSPCFLVDC5"
+
+  apiKey:
+    "AIzaSyDJvrEO4oMfEZVa81hW7ciC_KlaE0cl9aA",
+
+  authDomain:
+    "b-irts.firebaseapp.com",
+
+  databaseURL:
+    "https://b-irts-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+  projectId:
+    "b-irts",
+
+  storageBucket:
+    "b-irts.firebasestorage.app",
+
+  messagingSenderId:
+    "812154469314",
+
+  appId:
+    "1:812154469314:web:9cb88abcdf1afc74a9b45b",
+
+  measurementId:
+    "G-KSPCFLVDC5"
+
 };
+
 
 firebase.initializeApp(firebaseConfig);
 
-const db = firebase.database();
+
+const db =
+  firebase.database();
+
 
 const studentsRef =
   db.ref("class11B/students");
+
 
 const attendanceRef =
   db.ref("class11B/attendance");
@@ -769,6 +1286,7 @@ const attendanceRef =
 ===================================================== */
 
 const initialStudents = [
+
   "Анхбаяр",
   "Анужин",
   "Баасаннэмэх",
@@ -800,13 +1318,24 @@ const initialStudents = [
   "Энх-Уянга",
   "Энх-Орчлон",
   "Энхмэнд"
+
 ];
 
-const ADMIN_PASSWORD = "0020";
 
-let students = [...initialStudents];
-let attendance = {};
-let dataReady = false;
+const ADMIN_PASSWORD =
+  "0020";
+
+
+let students =
+  [...initialStudents];
+
+
+let attendance =
+  {};
+
+
+let dataReady =
+  false;
 
 
 /* =====================================================
@@ -814,24 +1343,33 @@ let dataReady = false;
 ===================================================== */
 
 function dateKey(){
+
   return new Date()
     .toISOString()
     .slice(0,10);
+
 }
+
 
 function todayText(){
-  return new Date().toLocaleDateString(
-    "mn-MN",
-    {
-      year:"numeric",
-      month:"long",
-      day:"numeric",
-      weekday:"long"
-    }
-  );
+
+  return new Date()
+    .toLocaleDateString(
+      "mn-MN",
+      {
+        year:"numeric",
+        month:"long",
+        day:"numeric",
+        weekday:"long"
+      }
+    );
+
 }
 
-document.getElementById("today").textContent =
+
+document.getElementById(
+  "today"
+).textContent =
   todayText();
 
 
@@ -842,13 +1380,25 @@ document.getElementById("today").textContent =
 function toggleSidebar(){
 
   const sidebar =
-    document.getElementById("sidebar");
+    document.getElementById(
+      "sidebar"
+    );
+
 
   const main =
-    document.querySelector(".main");
+    document.querySelector(
+      ".main"
+    );
 
-  sidebar.classList.toggle("hidden");
-  main.classList.toggle("full");
+
+  sidebar.classList.toggle(
+    "hidden"
+  );
+
+
+  main.classList.toggle(
+    "full"
+  );
 
 }
 
@@ -859,11 +1409,16 @@ function toggleSidebar(){
 
 function showPage(p){
 
+
   document
     .querySelectorAll(".page")
-    .forEach(x =>
-      x.classList.remove("active")
+    .forEach(
+      x =>
+        x.classList.remove(
+          "active"
+        )
     );
+
 
   document
     .getElementById(p)
@@ -877,12 +1432,14 @@ function showPage(p){
       p === "home"
     );
 
+
   document
     .getElementById("historyNav")
     .classList.toggle(
       "active",
       p === "history"
     );
+
 
   document
     .getElementById("adminNav")
@@ -897,12 +1454,17 @@ function showPage(p){
     renderAttendance();
 
   }
+
+
   else if(p === "history"){
 
     renderHistoryDates();
+
     renderHistory();
 
   }
+
+
   else if(p === "admin"){
 
     renderAdmin();
@@ -910,16 +1472,48 @@ function showPage(p){
   }
 
 
-  /* ⭐ Page сонгосны дараа Sidebar автоматаар хаагдана */
+  /* Sidebar автоматаар хаагдана */
 
   const sidebar =
-    document.getElementById("sidebar");
+    document.getElementById(
+      "sidebar"
+    );
+
 
   const main =
-    document.querySelector(".main");
+    document.querySelector(
+      ".main"
+    );
 
-  sidebar.classList.add("hidden");
-  main.classList.add("full");
+
+  sidebar.classList.add(
+    "hidden"
+  );
+
+
+  main.classList.add(
+    "full"
+  );
+
+}
+
+
+/* =====================================================
+   STATUS CLASS
+===================================================== */
+
+function statusClass(status){
+
+  if(status === "Ирсэн")
+    return "status-present";
+
+  if(status === "Тасалсан")
+    return "status-absent";
+
+  if(status === "Чөлөөтэй")
+    return "status-free";
+
+  return "";
 
 }
 
@@ -929,20 +1523,34 @@ function showPage(p){
 ===================================================== */
 
 function key(){
+
   return dateKey();
+
 }
+
 
 function getToday(){
+
   return attendance[key()] || {};
+
 }
 
 
-async function setStatus(name,status){
+async function setStatus(
+  name,
+  status
+){
 
-  if(!attendance[key()])
+  if(!attendance[key()]){
+
     attendance[key()] = {};
 
-  attendance[key()][name] = status;
+  }
+
+
+  attendance[key()][name] =
+    status;
+
 
   try{
 
@@ -951,9 +1559,11 @@ async function setStatus(name,status){
       .child(name)
       .set(status);
 
+
     renderAttendance();
 
   }
+
   catch(e){
 
     console.error(e);
@@ -974,82 +1584,147 @@ async function setStatus(name,status){
 function renderAttendance(){
 
   const search =
-    document.getElementById("search");
+    document.getElementById(
+      "search"
+    );
+
 
   const q =
-    (search.value || "")
-      .toLowerCase()
-      .trim();
+    (
+      search.value || ""
+    )
+    .toLowerCase()
+    .trim();
+
 
   const data =
     getToday();
+
 
   const body =
     document.getElementById(
       "attendanceBody"
     );
 
+
   const filtered =
-    students.filter(s =>
-      s.toLowerCase().includes(q)
+    students.filter(
+      s =>
+        s.toLowerCase()
+         .includes(q)
     );
 
 
   body.innerHTML =
-    filtered.map((s,i)=>{
 
-      const status =
-        data[s] || "Ирсэн";
+    filtered.map(
+      (s,i) => {
 
-      return `
-        <tr>
+        const status =
+          data[s] ||
+          "Ирсэн";
 
-          <td>${i + 1}</td>
 
-          <td>
-            <b>${escapeHtml(s)}</b>
-          </td>
+        return `
 
-          <td>
+          <tr>
 
-            <div class="status">
+            <td>
+              ${i + 1}
+            </td>
 
-              ${[
-                "Ирсэн",
-                "Тасалсан",
-                "Чөлөөтэй"
-              ].map(x => `
+
+            <td>
+              <b>
+                ${escapeHtml(s)}
+              </b>
+            </td>
+
+
+            <td>
+
+              <div class="status">
+
 
                 <button
-                  class="${status === x ? "active" : ""}"
-                  onclick="setStatus('${escapeJs(s)}','${x}')">
 
-                  ${x}
+                  class="${statusClass("Ирсэн")}
+                  ${status === "Ирсэн" ? "active" : ""}
+
+                  onclick="
+                    setStatus(
+                      '${escapeJs(s)}',
+                      'Ирсэн'
+                    )
+                  ">
+
+                  Ирсэн
 
                 </button>
 
-              `).join("")}
 
-            </div>
+                <button
 
-          </td>
+                  class="${statusClass("Тасалсан")}
+                  ${status === "Тасалсан" ? "active" : ""}
 
-        </tr>
-      `;
+                  onclick="
+                    setStatus(
+                      '${escapeJs(s)}',
+                      'Тасалсан'
+                    )
+                  ">
 
-    }).join("");
+                  Тасалсан
+
+                </button>
+
+
+                <button
+
+                  class="${statusClass("Чөлөөтэй")}
+                  ${status === "Чөлөөтэй" ? "active" : ""}
+
+                  onclick="
+                    setStatus(
+                      '${escapeJs(s)}',
+                      'Чөлөөтэй'
+                    )
+                  ">
+
+                  Чөлөөтэй
+
+                </button>
+
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    ).join("");
 
 
   if(!filtered.length){
 
     body.innerHTML = `
+
       <tr>
+
         <td
           colspan="3"
           class="empty">
+
           Сурагч олдсонгүй.
+
         </td>
+
       </tr>
+
     `;
 
   }
@@ -1069,40 +1744,64 @@ function updateStats(){
   const data =
     getToday();
 
-  document.getElementById("total")
-    .textContent =
+
+  document.getElementById(
+    "total"
+  ).textContent =
     students.length;
 
-  document.getElementById("present")
-    .textContent =
+
+  document.getElementById(
+    "present"
+  ).textContent =
+
     students.filter(
-      s => (data[s] || "Ирсэн")
-      === "Ирсэн"
+      s =>
+        (
+          data[s] ||
+          "Ирсэн"
+        ) === "Ирсэн"
     ).length;
 
-  document.getElementById("absent")
-    .textContent =
+
+  document.getElementById(
+    "absent"
+  ).textContent =
+
     students.filter(
-      s => data[s] === "Тасалсан"
+      s =>
+        data[s] ===
+        "Тасалсан"
     ).length;
 
-  document.getElementById("free")
-    .textContent =
+
+  document.getElementById(
+    "free"
+  ).textContent =
+
     students.filter(
-      s => data[s] === "Чөлөөтэй"
+      s =>
+        data[s] ===
+        "Чөлөөтэй"
     ).length;
 
 }
 
 
 /* =====================================================
-   HISTORY - LAST 30 DAYS
+   HISTORY DATE
 ===================================================== */
 
-function formatHistoryDate(date){
+function formatHistoryDate(
+  date
+){
 
   const d =
-    new Date(date + "T00:00:00");
+    new Date(
+      date +
+      "T00:00:00"
+    );
+
 
   return d.toLocaleDateString(
     "mn-MN",
@@ -1124,38 +1823,72 @@ function renderHistoryDates(){
       "historyDate"
     );
 
+
   const today =
     new Date();
 
-  const dates =
-    Object.keys(attendance || {})
-      .filter(date => {
 
-        if(!/^\d{4}-\d{2}-\d{2}$/.test(date))
+  const dates =
+    Object.keys(
+      attendance || {}
+    )
+    .filter(
+      date => {
+
+        if(
+          !/^\d{4}-\d{2}-\d{2}$/
+            .test(date)
+        ){
+
           return false;
 
+        }
+
+
         const d =
-          new Date(date + "T00:00:00");
+          new Date(
+            date +
+            "T00:00:00"
+          );
+
 
         const diff =
           Math.floor(
-            (today - d) /
-            (1000 * 60 * 60 * 24)
+            (
+              today - d
+            ) /
+            (
+              1000 *
+              60 *
+              60 *
+              24
+            )
           );
 
-        return diff >= 0 && diff <= 30;
 
-      })
-      .sort()
-      .reverse();
+        return (
+          diff >= 0 &&
+          diff <= 30
+        );
+
+      }
+    )
+    .sort()
+    .reverse();
 
 
   if(!dates.length){
 
-    select.innerHTML =
-      `<option value="">
-        Сүүлийн 30 хоногт ирц алга
-      </option>`;
+    select.innerHTML = `
+
+      <option value="">
+
+        Сүүлийн 30 хоногт
+        ирц алга
+
+      </option>
+
+    `;
 
     return;
 
@@ -1165,22 +1898,34 @@ function renderHistoryDates(){
   const current =
     select.value;
 
+
   select.innerHTML =
-    dates.map(date => `
-      <option value="${date}">
-        ${formatHistoryDate(date)}
-      </option>
-    `).join("");
+
+    dates.map(
+      date => `
+
+        <option value="${date}">
+
+          ${formatHistoryDate(date)}
+
+        </option>
+
+      `
+    ).join("");
 
 
-  if(dates.includes(current)){
+  if(
+    dates.includes(current)
+  ){
 
-    select.value = current;
+    select.value =
+      current;
 
   }
   else{
 
-    select.value = dates[0];
+    select.value =
+      dates[0];
 
   }
 
@@ -1198,8 +1943,10 @@ function renderHistory(){
       "historyDate"
     );
 
+
   const date =
     select.value;
+
 
   const body =
     document.getElementById(
@@ -1210,31 +1957,42 @@ function renderHistory(){
   if(!date){
 
     body.innerHTML = `
+
       <tr>
+
         <td
           colspan="3"
           class="empty">
+
           Сүүлийн 30 хоногт
           ирц бүртгэгдээгүй байна.
+
         </td>
+
       </tr>
+
     `;
+
 
     document.getElementById(
       "historyTotal"
     ).textContent = 0;
 
+
     document.getElementById(
       "historyPresent"
     ).textContent = 0;
+
 
     document.getElementById(
       "historyAbsent"
     ).textContent = 0;
 
+
     document.getElementById(
       "historyFree"
     ).textContent = 0;
+
 
     return;
 
@@ -1248,71 +2006,119 @@ function renderHistory(){
   document.getElementById(
     "historyTitle"
   ).textContent =
+
     formatHistoryDate(date) +
     " — Ирц";
 
 
   let present = 0;
+
   let absent = 0;
+
   let free = 0;
 
 
   body.innerHTML =
-    students.map((s,i)=>{
 
-      const status =
-        data[s] || "Ирсэн";
+    students.map(
+      (s,i) => {
 
-
-      if(status === "Ирсэн")
-        present++;
-
-      if(status === "Тасалсан")
-        absent++;
-
-      if(status === "Чөлөөтэй")
-        free++;
+        const status =
+          data[s] ||
+          "Ирсэн";
 
 
-      return `
-        <tr>
+        if(
+          status === "Ирсэн"
+        )
+          present++;
 
-          <td>${i + 1}</td>
 
-          <td>
-            <b>${escapeHtml(s)}</b>
-          </td>
+        if(
+          status === "Тасалсан"
+        )
+          absent++;
 
-          <td>
 
-            <div class="status">
+        if(
+          status === "Чөлөөтэй"
+        )
+          free++;
 
-              <button
-                class="${status === "Ирсэн" ? "active" : ""}"
-                disabled>
-                Ирсэн
-              </button>
 
-              <button
-                class="${status === "Тасалсан" ? "active" : ""}"
-                disabled>
-                Тасалсан
-              </button>
+        return `
 
-              <button
-                class="${status === "Чөлөөтэй" ? "active" : ""}"
-                disabled>
-                Чөлөөтэй
-              </button>
+          <tr>
 
-            </div>
+            <td>
+              ${i + 1}
+            </td>
 
-          </td>
 
-        </tr>
-      `;
+            <td>
+              <b>
+                ${escapeHtml(s)}
+              </b>
+            </td>
 
-    }).join("");
+
+            <td>
+
+              <div class="status">
+
+
+                <button
+
+                  disabled
+
+                  class="
+                    ${statusClass("Ирсэн")}
+                    ${status === "Ирсэн" ? "active" : ""}
+                  ">
+
+                  Ирсэн
+
+                </button>
+
+
+                <button
+
+                  disabled
+
+                  class="
+                    ${statusClass("Тасалсан")}
+                    ${status === "Тасалсан" ? "active" : ""}
+                  ">
+
+                  Тасалсан
+
+                </button>
+
+
+                <button
+
+                  disabled
+
+                  class="
+                    ${statusClass("Чөлөөтэй")}
+                    ${status === "Чөлөөтэй" ? "active" : ""}
+                  ">
+
+                  Чөлөөтэй
+
+                </button>
+
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
+
+      }
+    ).join("");
 
 
   document.getElementById(
@@ -1320,15 +2126,18 @@ function renderHistory(){
   ).textContent =
     students.length;
 
+
   document.getElementById(
     "historyPresent"
   ).textContent =
     present;
 
+
   document.getElementById(
     "historyAbsent"
   ).textContent =
     absent;
+
 
   document.getElementById(
     "historyFree"
@@ -1349,6 +2158,7 @@ async function addStudent(){
       "newStudent"
     );
 
+
   const name =
     input.value.trim();
 
@@ -1367,8 +2177,8 @@ async function addStudent(){
   if(
     students.some(
       s =>
-      s.toLowerCase() ===
-      name.toLowerCase()
+        s.toLowerCase() ===
+        name.toLowerCase()
     )
   ){
 
@@ -1384,8 +2194,12 @@ async function addStudent(){
   try{
 
     await studentsRef.set(
-      [...students,name]
+      [
+        ...students,
+        name
+      ]
     );
+
 
     input.value = "";
 
@@ -1403,7 +2217,9 @@ async function addStudent(){
 }
 
 
-async function removeStudent(name){
+async function removeStudent(
+  name
+){
 
   if(
     !confirm(
@@ -1417,9 +2233,11 @@ async function removeStudent(name){
   try{
 
     await studentsRef.set(
+
       students.filter(
         s => s !== name
       )
+
     );
 
   }
@@ -1441,33 +2259,49 @@ function renderAdmin(){
   document.getElementById(
     "adminCount"
   ).textContent =
-    "(" + students.length + ")";
+    "(" +
+    students.length +
+    ")";
 
 
   document.getElementById(
     "adminList"
   ).innerHTML =
 
-    students.map((s,i)=>`
+    students.map(
+      (s,i) => `
 
-      <div class="student-row">
+        <div
+          class="student-row">
 
-        <span>
-          ${i + 1}.
-          <b>${escapeHtml(s)}</b>
-        </span>
+          <span>
 
-        <button
-          class="delete"
-          onclick="removeStudent('${escapeJs(s)}')">
+            ${i + 1}.
+            <b>
+              ${escapeHtml(s)}
+            </b>
 
-          Хасах
+          </span>
 
-        </button>
 
-      </div>
+          <button
 
-    `).join("");
+            class="delete"
+
+            onclick="
+              removeStudent(
+                '${escapeJs(s)}'
+              )
+            ">
+
+            Хасах
+
+          </button>
+
+        </div>
+
+      `
+    ).join("");
 
 }
 
@@ -1482,22 +2316,29 @@ function openAdmin(){
     "adminPassword"
   ).value = "";
 
+
   document.getElementById(
     "loginError"
   ).textContent = "";
 
+
   document.getElementById(
     "loginModal"
-  ).classList.add("show");
+  ).classList.add(
+    "show"
+  );
 
 
-  setTimeout(()=>{
+  setTimeout(
+    () => {
 
-    document.getElementById(
-      "adminPassword"
-    ).focus();
+      document.getElementById(
+        "adminPassword"
+      ).focus();
 
-  },100);
+    },
+    100
+  );
 
 }
 
@@ -1506,7 +2347,9 @@ function closeLogin(){
 
   document.getElementById(
     "loginModal"
-  ).classList.remove("show");
+  ).classList.remove(
+    "show"
+  );
 
 }
 
@@ -1519,7 +2362,10 @@ function checkAdmin(){
     ).value;
 
 
-  if(password === ADMIN_PASSWORD){
+  if(
+    password ===
+    ADMIN_PASSWORD
+  ){
 
     closeLogin();
 
@@ -1539,30 +2385,17 @@ function checkAdmin(){
 
 
 /* =====================================================
-   IMAGE DOWNLOAD
-   iPhone + Android + PC
+   ⭐ 4 COLUMN EXPORT IMAGE
 ===================================================== */
 
 async function downloadAttendanceImage(){
 
-  const home =
-    document.getElementById("home");
-
-
-  if(!home){
-
-    alert(
-      "Ирцийн хэсэг олдсонгүй."
-    );
-
-    return;
-
-  }
-
-
   try{
 
-    if(typeof html2canvas === "undefined"){
+    if(
+      typeof html2canvas ===
+      "undefined"
+    ){
 
       alert(
         "Зураг үүсгэгч ачаалагдаагүй байна."
@@ -1573,30 +2406,425 @@ async function downloadAttendanceImage(){
     }
 
 
-    window.scrollTo(0,0);
+    const data =
+      getToday();
 
+
+    /* -----------------------------------------------
+       Export-д зориулсан тусгай хэсэг
+    ------------------------------------------------ */
+
+    const exportBox =
+      document.createElement(
+        "div"
+      );
+
+
+    exportBox.style.position =
+      "fixed";
+
+    exportBox.style.left =
+      "-100000px";
+
+    exportBox.style.top =
+      "0";
+
+    exportBox.style.width =
+      "1200px";
+
+    exportBox.style.background =
+      "#080a0f";
+
+    exportBox.style.color =
+      "#ffffff";
+
+    exportBox.style.padding =
+      "40px";
+
+    exportBox.style.fontFamily =
+      "Arial, sans-serif";
+
+
+    /* TITLE */
+
+    const title =
+      document.createElement(
+        "div"
+      );
+
+
+    title.innerHTML = `
+
+      <div style="
+        font-size:34px;
+        font-weight:700;
+        margin-bottom:8px;
+      ">
+
+        11Б ирцийн мэдээлэл
+
+      </div>
+
+
+      <div style="
+        color:#8f98aa;
+        font-size:16px;
+        margin-bottom:25px;
+      ">
+
+        ${todayText()}
+
+      </div>
+
+    `;
+
+
+    exportBox.appendChild(
+      title
+    );
+
+
+    /* STATS */
+
+    const statsBox =
+      document.createElement(
+        "div"
+      );
+
+
+    statsBox.style.display =
+      "grid";
+
+    statsBox.style.gridTemplateColumns =
+      "repeat(4,1fr)";
+
+    statsBox.style.gap =
+      "12px";
+
+    statsBox.style.marginBottom =
+      "25px";
+
+
+    const present =
+      students.filter(
+        s =>
+          (
+            data[s] ||
+            "Ирсэн"
+          ) === "Ирсэн"
+      ).length;
+
+
+    const absent =
+      students.filter(
+        s =>
+          data[s] === "Тасалсан"
+      ).length;
+
+
+    const free =
+      students.filter(
+        s =>
+          data[s] === "Чөлөөтэй"
+      ).length;
+
+
+    statsBox.innerHTML = `
+
+      <div style="
+        background:#10141d;
+        border:1px solid #252a36;
+        border-top:4px solid #7c5cff;
+        border-radius:12px;
+        padding:18px;
+      ">
+
+        <div style="
+          color:#8f98aa;
+          font-size:13px;
+        ">
+          Нийт сурагч
+        </div>
+
+        <div style="
+          font-size:28px;
+          font-weight:700;
+          margin-top:6px;
+        ">
+          ${students.length}
+        </div>
+
+      </div>
+
+
+      <div style="
+        background:#10141d;
+        border:1px solid #252a36;
+        border-top:4px solid #20c997;
+        border-radius:12px;
+        padding:18px;
+      ">
+
+        <div style="
+          color:#8f98aa;
+          font-size:13px;
+        ">
+          Ирсэн
+        </div>
+
+        <div style="
+          color:#20c997;
+          font-size:28px;
+          font-weight:700;
+          margin-top:6px;
+        ">
+          ${present}
+        </div>
+
+      </div>
+
+
+      <div style="
+        background:#10141d;
+        border:1px solid #252a36;
+        border-top:4px solid #ff5252;
+        border-radius:12px;
+        padding:18px;
+      ">
+
+        <div style="
+          color:#8f98aa;
+          font-size:13px;
+        ">
+          Тасалсан
+        </div>
+
+        <div style="
+          color:#ff5252;
+          font-size:28px;
+          font-weight:700;
+          margin-top:6px;
+        ">
+          ${absent}
+        </div>
+
+      </div>
+
+
+      <div style="
+        background:#10141d;
+        border:1px solid #252a36;
+        border-top:4px solid #ffc857;
+        border-radius:12px;
+        padding:18px;
+      ">
+
+        <div style="
+          color:#8f98aa;
+          font-size:13px;
+        ">
+          Чөлөөтэй
+        </div>
+
+        <div style="
+          color:#ffc857;
+          font-size:28px;
+          font-weight:700;
+          margin-top:6px;
+        ">
+          ${free}
+        </div>
+
+      </div>
+
+    `;
+
+
+    exportBox.appendChild(
+      statsBox
+    );
+
+
+    /* STUDENT GRID */
+
+    const grid =
+      document.createElement(
+        "div"
+      );
+
+
+    grid.style.display =
+      "grid";
+
+    /* ⭐ 4 БАГАНА */
+
+    grid.style.gridTemplateColumns =
+      "repeat(4, 1fr)";
+
+    grid.style.gap =
+      "10px";
+
+
+    students.forEach(
+      (student,index) => {
+
+        const status =
+          data[student] ||
+          "Ирсэн";
+
+
+        let color =
+          "#20c997";
+
+        let bg =
+          "#10261f";
+
+        let border =
+          "#1d755c";
+
+
+        if(
+          status === "Тасалсан"
+        ){
+
+          color =
+            "#ff5252";
+
+          bg =
+            "#291317";
+
+          border =
+            "#75323a";
+
+        }
+
+
+        if(
+          status === "Чөлөөтэй"
+        ){
+
+          color =
+            "#ffc857";
+
+          bg =
+            "#29230f";
+
+          border =
+            "#80672c";
+
+        }
+
+
+        const item =
+          document.createElement(
+            "div"
+          );
+
+
+        item.style.background =
+          bg;
+
+        item.style.border =
+          "1px solid " +
+          border;
+
+        item.style.borderRadius =
+          "10px";
+
+        item.style.padding =
+          "13px";
+
+        item.style.minHeight =
+          "65px";
+
+
+        item.innerHTML = `
+
+          <div style="
+            font-size:12px;
+            color:#8f98aa;
+            margin-bottom:5px;
+          ">
+
+            ${index + 1}
+
+          </div>
+
+
+          <div style="
+            font-size:15px;
+            font-weight:700;
+            color:#ffffff;
+            margin-bottom:7px;
+            word-break:break-word;
+          ">
+
+            ${escapeHtml(student)}
+
+          </div>
+
+
+          <div style="
+            display:inline-block;
+            padding:5px 9px;
+            border-radius:7px;
+            background:${color};
+            color:#080a0f;
+            font-size:11px;
+            font-weight:700;
+          ">
+
+            ${status}
+
+          </div>
+
+        `;
+
+
+        grid.appendChild(
+          item
+        );
+
+      }
+    );
+
+
+    exportBox.appendChild(
+      grid
+    );
+
+
+    document.body.appendChild(
+      exportBox
+    );
+
+
+    /* CANVAS */
 
     const canvas =
-      await html2canvas(home,{
+      await html2canvas(
+        exportBox,
+        {
+          backgroundColor:
+            "#080a0f",
 
-        backgroundColor:"#080a0f",
+          scale:2,
 
-        scale:
-          Math.min(
-            window.devicePixelRatio || 2,
-            2
-          ),
+          useCORS:true,
 
-        useCORS:true,
+          allowTaint:false,
 
-        allowTaint:false,
+          logging:false
+        }
+      );
 
-        logging:false,
 
-        imageTimeout:15000
+    document.body.removeChild(
+      exportBox
+    );
 
-      });
 
+    /* BLOB */
 
     canvas.toBlob(
       async function(blob){
@@ -1618,7 +2846,9 @@ async function downloadAttendanceImage(){
           ".png";
 
 
-        /* 📱 iPhone / Android */
+        /* =========================================
+           📱 IPHONE / ANDROID
+        ========================================= */
 
         if(
           navigator.share &&
@@ -1630,7 +2860,8 @@ async function downloadAttendanceImage(){
               [blob],
               fileName,
               {
-                type:"image/png"
+                type:
+                  "image/png"
               }
             );
 
@@ -1657,10 +2888,10 @@ async function downloadAttendanceImage(){
             }
 
           }
-          catch(shareError){
+          catch(error){
 
             if(
-              shareError.name ===
+              error.name ===
               "AbortError"
             ){
 
@@ -1673,33 +2904,53 @@ async function downloadAttendanceImage(){
         }
 
 
-        /* 💻 PC / Browser fallback */
+        /* =========================================
+           💻 PC FALLBACK
+        ========================================= */
 
         const url =
-          URL.createObjectURL(blob);
+          URL.createObjectURL(
+            blob
+          );
 
 
         const link =
-          document.createElement("a");
+          document.createElement(
+            "a"
+          );
 
-        link.href = url;
+
+        link.href =
+          url;
+
 
         link.download =
           fileName;
 
 
-        document.body.appendChild(link);
+        document.body.appendChild(
+          link
+        );
+
 
         link.click();
 
-        document.body.removeChild(link);
+
+        document.body.removeChild(
+          link
+        );
 
 
-        setTimeout(()=>{
+        setTimeout(
+          () => {
 
-          URL.revokeObjectURL(url);
+            URL.revokeObjectURL(
+              url
+            );
 
-        },1000);
+          },
+          1000
+        );
 
 
       },
@@ -1713,6 +2964,7 @@ async function downloadAttendanceImage(){
       "Image error:",
       error
     );
+
 
     alert(
       "Зураг үүсгэхэд алдаа гарлаа."
@@ -1730,8 +2982,14 @@ async function downloadAttendanceImage(){
 function escapeJs(s){
 
   return s
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
+    .replace(
+      /\\/g,
+      "\\\\"
+    )
+    .replace(
+      /'/g,
+      "\\'"
+    );
 
 }
 
@@ -1739,11 +2997,26 @@ function escapeJs(s){
 function escapeHtml(s){
 
   return s
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
@@ -1754,6 +3027,7 @@ function escapeHtml(s){
 
 studentsRef.on(
   "value",
+
   snap => {
 
     const val =
@@ -1765,37 +3039,49 @@ studentsRef.on(
       val.length
     ){
 
-      students = val;
+      students =
+        val;
 
     }
+
     else if(!val){
 
       students =
         [...initialStudents];
+
 
       studentsRef.set(
         students
       );
 
     }
+
     else{
 
       students =
-        Object.values(val);
+        Object.values(
+          val
+        );
 
     }
 
 
-    dataReady = true;
+    dataReady =
+      true;
+
 
     renderAttendance();
 
     renderAdmin();
 
   },
+
   err => {
 
-    console.error(err);
+    console.error(
+      err
+    );
+
 
     alert(
       "Firebase database-тэй холбогдож чадсангүй. Firebase Rules болон database URL-ээ шалгана уу."
@@ -1811,6 +3097,7 @@ studentsRef.on(
 
 attendanceRef.on(
   "value",
+
   snap => {
 
     attendance =
@@ -1822,9 +3109,13 @@ attendanceRef.on(
 
     if(
       document
-        .getElementById("history")
+        .getElementById(
+          "history"
+        )
         .classList
-        .contains("active")
+        .contains(
+          "active"
+        )
     ){
 
       renderHistoryDates();
@@ -1841,7 +3132,9 @@ attendanceRef.on(
    START
 ===================================================== */
 
-showPage("home");
+showPage(
+  "home"
+);
 
 </script>
 
