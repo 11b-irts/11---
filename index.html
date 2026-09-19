@@ -5,13 +5,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>11Б ирцийн мэдээлэл</title>
- .logo img{
-  width:80px;
-  height:80px;
-  object-fit:contain;
-  display:block;
-  margin:auto;
-}
 <style>
 :root{--bg:#080a0f;--card:#10141d;--card2:#151a25;--text:#f4f6fb;--muted:#8f98aa;--accent:#7c5cff;--green:#25d695;--red:#ff5d73;--yellow:#ffca55;--blue:#4ea1ff}
 *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 80% 0%,#19122c 0,#080a0f 42%);color:var(--text);min-height:100vh}
@@ -55,9 +48,27 @@
   transition:margin-left .25s ease,width .25s ease;
 }
 
-.main.full{
+.top-logo{
+  position:fixed;
+  top:15px;
+  left:15px;
+  width:60px;
+  height:60px;
+  z-index:200;
+}
+.sidebar{
+  display:none;
+}
+
+.main{
   margin-left:0;
   width:100%;
+}
+.top-logo img{
+  width:60px;
+  height:60px;
+  object-fit:contain;
+  display:block;
 }
 </style>
 </head>
